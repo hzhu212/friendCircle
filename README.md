@@ -8,6 +8,16 @@
 
 :smile::smile:暂时先做这些吧，后面的再说……
 
+**统一使用远程数据库：**
+```
+host: 119.29.155.72  
+mysql username: ******  
+password: ******  
+database: friendCircle
+```
+用户名和密码找我要:smile::smile:，总之不能暴露出去啦~  
+在自己的电脑命令行执行：`mysql -h 119.29.155.72 -u username -p`，输入密码即可登陆数据库
+
 ---
 
 ## 附
