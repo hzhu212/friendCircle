@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 20px;
@@ -46,7 +46,7 @@
         margin-top: 28px;
       }
     </style>
-    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
   <body>
@@ -81,7 +81,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery.js"></script>
+    <script src="./bootstrap/js/jquery.js"></script>
 
   </body>
 </html>
