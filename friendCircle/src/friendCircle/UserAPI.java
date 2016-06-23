@@ -19,15 +19,38 @@ public class UserAPI extends SQLmanager {
 		close();
 		return temp;
 	}
+	public static boolean judgeName(String name) throws Exception {
+		startMySQL();
+		boolean result = true;
+		String sql = "SELECT userName FROM `friendCircle`.`user`";
+		rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			if (rs.getString("userName").equals(name))
+				result = false;
+		}
+		close();
+		return result;
+	}
+	public static boolean judgeLegal(String name, String password) throws Exception {
+		startMySQL();
+		boolean result = false;
+		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userName='"+name+"'";
+		rs = stmt.executeQuery(sql);
+		if (rs.next())
+			if (rs.getString("password").equals(password))
+				result = true;
+		close();
+		return result;
+	}
 	public static String addUser(String[] info) throws Exception {	//添加用户信息，返回自动生成的用户ID
 		startMySQL();
 		if (info.length == 9) {
 			String sql1 = "DELETE FROM `friendCircle`.`user` WHERE userID='"+info[0]+"'";
-			stmt.execute(sql1);
+			stmt.executeQuery(sql1);
 			String sql2 = "INSERT INTO `friendCircle`.`user` VALUES "
 					+ "('"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"','"+info[4]+"',"
 							+ "'"+info[5]+"','"+info[6]+"','"+info[7]+"','"+info[8]+"')";
-			stmt.execute(sql2);
+			stmt.executeQuery(sql2);
 			close();
 			return info[0];
 		}
@@ -36,15 +59,15 @@ public class UserAPI extends SQLmanager {
 			String sql = "INSERT INTO `friendCircle`.`user` VALUES "
 					+ "('"+id+"','"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"',"
 							+ "'"+info[4]+"','"+info[5]+"','"+info[6]+"','"+info[7]+"')";
-			stmt.execute(sql);
+			stmt.executeQuery(sql);
 			close();
 			return id;
 		}			
 	}
-	public static String[] getUser(String id) throws Exception {	//返回用户信息
+	public static String[] getUser(String name) throws Exception {	//返回用户信息
 		startMySQL();
 		String[] info = new String[9];
-		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userID='"+id+"'";
+		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userName='"+name+"'";
 		rs = stmt.executeQuery(sql);
 		if (rs.next()) {
 			info[0] = rs.getString("userID");

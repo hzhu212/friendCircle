@@ -7,10 +7,10 @@ public class FriendAPI extends SQLmanager {
 		startMySQL();
 		String sql1 = "INSERT INTO `friendCircle`.`friend` VALUES "
 				+ "('"+info[0]+"','"+info[1]+"')";
-		stmt.execute(sql1);
+		stmt.executeQuery(sql1);
 		String sql2 = "INSERT INTO `friendCircle`.`friend` VALUES "
 				+ "('"+info[1]+"','"+info[0]+"')";
-		stmt.execute(sql2);
+		stmt.executeQuery(sql2);
 		close();
 	}
 	public static ArrayList<String> getFriend(String id) throws Exception {	//返回朋友信息
