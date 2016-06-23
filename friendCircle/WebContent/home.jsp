@@ -70,7 +70,8 @@
       <div class="jumbotron">
         <h1>FriendCircle!</h1>
         <p class="lead">FriendCircle, share wonderful moments with your friends</p>
-        <a class="btn btn-large btn-success" href="signin.jsp">注册</a>
+        <a class="btn btn-large btn-success" href="login.jsp">登陆</a>
+        <a class="btn btn-large btn-success" href="signup.jsp">注册</a>
       </div>
 
       <hr>
