@@ -18,6 +18,28 @@ database: friendCircle
 用户名和密码找我要:smile::smile:，总之不能暴露出去啦~  
 在自己的电脑命令行执行：`mysql -h 119.29.155.72 -u username -p`，输入密码即可登陆数据库
 
+## 页面结构
+
+```
+WebContent/
+├── home.jsp
+│   └── link->login.jsp
+├── login.jsp
+│   ├── link->signin.jsp
+│   └── if success: link->user-status.jsp
+├── signin.jsp
+│   └── link->login.jsp
+├── user-status.jsp
+│   ├── link->user-friends.jsp
+│   └── link->user-info.jsp
+├── user-friends.jsp
+│   ├── link->user-status.jsp
+│   └── link->user-info.jsp
+└── user-info.jsp
+    ├── link->user-status.jsp
+    └── link->user-friends.jsp
+```
+
 ---
 
 ## 附
