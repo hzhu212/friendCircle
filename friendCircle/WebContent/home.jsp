@@ -1,14 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>FriendCircle Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="./css/bootstrap.css" rel="stylesheet">
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 20px;
@@ -46,7 +49,7 @@
         margin-top: 28px;
       }
     </style>
-    <link href="./css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
   <body>
@@ -81,7 +84,7 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery.js"></script>
+    <script src="./bootstrap/js/jquery.js"></script>
 
   </body>
 </html>
