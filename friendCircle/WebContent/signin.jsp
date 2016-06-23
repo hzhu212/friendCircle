@@ -20,6 +20,7 @@
         max-width: 300px;
         padding: 19px 29px 29px;
         margin: 0 auto 20px;
+        margin-top: 50px;
         background-color: #fff;
         border: 1px solid #e5e5e5;
         -webkit-border-radius: 5px;
@@ -34,14 +35,12 @@
         margin-bottom: 10px;
       }
       .form-signin input[type="text"],
+      .form-signin input[type="email"],
       .form-signin input[type="password"] {
         font-size: 16px;
         height: auto;
         margin-bottom: 15px;
         padding: 7px 9px;
-      }
-      .form-signin a{
-      	float: right;
       }
 
     </style>
@@ -52,17 +51,17 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" action="dosignin" method="post">
         <h2 class="form-signin-heading">注册</h2>
-        <input type="text" class="input-block-level" placeholder="电子邮箱">
-        <input type="password" class="input-block-level" placeholder="请设定密码">
-        <input type="password" class="input-block-level" placeholder="请再次确认密码">
-        <input type="text" class="input-block-level" placeholder="请设定要显示的用户名">
+        <input type="email" class="input-block-level" placeholder="电子邮箱" required>
+        <input type="password" class="input-block-level" placeholder="请设定密码" required>
+        <input type="password" class="input-block-level" placeholder="请再次确认密码" required>
+        <input type="text" class="input-block-level" placeholder="请设定要显示的用户名" required>
 <!--         <label class="checkbox">
           <input type="checkbox" value="remember-me"> 记住我
         </label> -->
         <button class="btn btn-large btn-primary" type="submit">注册</button>
-        <a href="login.jsp" class="btn-large">登录</a>
+        <a href="login.jsp" class="btn-large pull-right">登录</a>
       </form>
 
     </div> <!-- /container -->

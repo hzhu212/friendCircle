@@ -20,6 +20,7 @@
         max-width: 300px;
         padding: 19px 29px 29px;
         margin: 0 auto 20px;
+        margin-top: 50px;
         background-color: #fff;
         border: 1px solid #e5e5e5;
         -webkit-border-radius: 5px;
@@ -52,7 +53,7 @@
 
     <div class="container">
 
-      <form class="form-login">
+      <form class="form-login" action="dologin" method="post">
         <h2 class="form-login-heading">登录</h2>
         <input type="text" class="input-block-level" placeholder="请输入用户名">
         <input type="password" class="input-block-level" placeholder="请输入密码">
@@ -63,7 +64,7 @@
           <input type="checkbox" value="remember-password"> 记住密码
         </label>
         <button class="btn btn-large btn-primary" type="submit">登录</button>
-        <a href="signin.jsp" class="btn-large">注册</a>
+        <a href="signin.jsp" class="btn-large pull-right">注册</a>
       </form>
 
     </div> <!-- /container -->
