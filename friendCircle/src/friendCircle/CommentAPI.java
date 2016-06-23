@@ -24,7 +24,7 @@ public class CommentAPI extends SQLmanager {
 		String id = produceID();
 		String sql = "INSERT INTO `friendCircle`.`comment` VALUES "
 				+ "('"+id+"','"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"','"+info[4]+"')";
-		stmt.execute(sql);
+		stmt.executeQuery(sql);
 		close();
 		return id;
 	}
