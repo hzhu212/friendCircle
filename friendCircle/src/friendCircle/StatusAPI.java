@@ -24,7 +24,7 @@ public class StatusAPI extends SQLmanager {
 		String id = produceID();
 		String sql = "INSERT INTO `friendCircle`.`status` VALUES "
 				+ "('"+id+"','"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"')";
-		stmt.execute(sql);
+		stmt.executeQuery(sql);
 		close();
 		return id;
 	}

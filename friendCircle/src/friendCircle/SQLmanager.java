@@ -25,29 +25,4 @@ public class SQLmanager {
 		stmt.close();
 		rs.close();
 	}
-	/*public void addFriend(String data) throws SQLException {	//添加好友
-		String[] info = dataParser(data);
-		String sql = "INSERT INTO `friendCircle`.`friend` VALUES "
-				+ "('"+info[0]+"','"+info[1]+"')";
-		stmt.execute(sql);
-	}
-	
-	public void addComment(String data) throws SQLException {	//添加评论
-		String[] info = dataParser(data);
-		String sql = "INSERT INTO `friendCircle`.`comment` VALUES "
-				+ "('"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"','"+info[4]+"','"+info[5]+"')";
-		stmt.execute(sql);
-	}
-	public void addReply(String data) throws SQLException {	//添加回复
-		String[] info = dataParser(data);
-		String sql = "INSERT INTO `friendCircle`.`reply` VALUES "
-				+ "('"+info[0]+"','"+info[1]+"')";
-		stmt.execute(sql);
-	}
-	public void addPicture(String data) throws SQLException {	//添加图片
-		String[] info = dataParser(data);
-		String sql = "INSERT INTO `friendCircle`.`picture` VALUES "
-				+ "('"+info[0]+"','"+info[1]+"','"+info[2]+"')";
-		stmt.execute(sql);
-	}*/
 }

@@ -8,7 +8,7 @@ public class PictureAPI extends SQLmanager {
 		for (String i : info) {
 			String sql = "INSERT INTO `friendCircle`.`picture` VALUES "
 					+ "('"+id+"','"+i+"')";
-			stmt.execute(sql);
+			stmt.executeQuery(sql);
 		}
 		close();
 	}

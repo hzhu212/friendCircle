@@ -5,7 +5,7 @@ public class ReplyAPI extends SQLmanager {
 		startMySQL();
 		String sql = "INSERT INTO `friendCircle`.`reply` VALUES "
 				+ "('"+info[0]+"','"+info[1]+"')";
-		stmt.execute(sql);
+		stmt.executeQuery(sql);
 		close();
 	}
 	public static String[] getReply(String id) throws Exception {	//返回回复信息
