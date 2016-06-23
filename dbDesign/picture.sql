@@ -4,14 +4,13 @@
 drop table if exists `picture`;
 
 create table `picture`(
-	`pictureID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`statusID` bigint(20) UNSIGNED NOT NULL,
 	`path` varchar(255) DEFAULT NULL,
-	`commentID` bigint(20) UNSIGNED NOT NULL,
-	PRIMARY KEY (`pictureID`),
-	FOREIGN KEY (`commentID`) REFERENCES `comment`(`commentID`)
+	FOREIGN KEY (`statusID`) REFERENCES `status`(`statusID`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-insert into `picture`(`path`,`commentID`) values("/image/picture/test1.jpg", 1);
-insert into `picture`(`path`,`commentID`) values("/image/picture/test2.jpg", 1);
-insert into `picture`(`path`,`commentID`) values("/image/picture/test3.jpg", 2);
+insert into `picture` values(1, "/image/picture/test1.jpg");
+insert into `picture` values(1, "/image/picture/test2.jpg");
+insert into `picture` values(2, "/image/picture/test3.jpg");
+
 
