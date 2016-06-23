@@ -28,16 +28,16 @@ WebContent/
 │   ├── link->signin.jsp
 │   └── if success: link->user-status.jsp
 ├── signin.jsp
-│	└── link->login.jsp
+│   └── link->login.jsp
 ├── user-status.jsp
-│	├── link->user-friends.jsp
-│	└── link->user-info.jsp
+│   ├── link->user-friends.jsp
+│   └── link->user-info.jsp
 ├── user-friends.jsp
-│	├── link->user-status.jsp
-│	└── link->user-info.jsp
+│   ├── link->user-status.jsp
+│   └── link->user-info.jsp
 └── user-info.jsp
- 	├── link->user-status.jsp
- 	└── link->user-friends.jsp
+    ├── link->user-status.jsp
+    └── link->user-friends.jsp
 ```
 
 ---
