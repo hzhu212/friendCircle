@@ -20,12 +20,13 @@ database: friendCircle
 
 ## 页面结构
 
-friendCircle/
+```
+WebContent/
 ├── home.jsp
 │   └── link->login.jsp
 ├── login.jsp
 │   ├── link->signin.jsp
-│   └── **if success**: link->user-status.jsp
+│   └── if success: link->user-status.jsp
 ├── signin.jsp
 │	└── link->login.jsp
 ├── user-status.jsp
@@ -37,6 +38,7 @@ friendCircle/
 └── user-info.jsp
  	├── link->user-status.jsp
  	└── link->user-friends.jsp
+```
 
 ---
 
