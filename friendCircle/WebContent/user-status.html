@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>FriendCircle Homepage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Le styles -->
+  <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+
+        <!-- .btn-navbar 用来切换显示被折叠的导航内容 -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+
+        <a class="brand" href="home.jsp">FriendCircle</a>
+        <div class="nav-collapse collapse">
+
+          <ul class="nav">
+            <li class="active">
+              <a href="user-status.jsp">我的主页</a>
+            </li>
+            <li><a href="user-friends.jsp">我的好友</a></li>
+            <li><a href="user-info.jsp">个人信息</a></li>
+          </ul>
+
+          <form class="navbar-search pull-left">
+            <input type="text" class="search-query" placeholder="搜索好友">
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container container-narrow" style="margin-top:50px;">
+    <div class="row">
+      <div class="span6 offset3">
+
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" data-src="holder.js/64x64" alt="头像" src="./bootstrap/img/display-photo/test1.jpg" style="width: 64px; height: 64px;">
+          </a>
+          <div class="media-body">
+            <h5 class="media-heading text-info" href="#">Haley</h5>
+            这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。
+            <hr>
+            <div class="well well-small">
+              <a href="#">zhang</a><span>回复</span><a href="#">Haley</a><span>: </span>
+              <span>hhh哈哈哈</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" data-src="holder.js/64x64" alt="头像" src="./bootstrap/img/display-photo/test1.jpg" style="width: 64px; height: 64px;">
+          </a>
+          <div class="media-body">
+            <h5 class="media-heading text-info">seo1</h5>
+            这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Le javascript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="./bootstrap/js/jquery-3.0.0.min.js"></script>
+
+</body>
+</html>
