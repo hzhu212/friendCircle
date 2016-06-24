@@ -52,15 +52,26 @@ public class StatusAPI extends SQLmanager {
 	//返回某个用户最近的所有状态
 	public static String[][] getStatusByUserID(String userID) throws Exception{
 		startMySQL();
-		String[][] result = new String[20][2];
-		String sql = "select content,date,time from `friendCircle`.`status` where `userID`='"+userID+"' order by date desc, time desc limit 20";
+		String[][] result = new String[20][4];
+
+		String sql = 
+		"select statusID,userID,content,date,time "+
+		"from `friendCircle`.`status` "+
+		"where `userID`='"+userID+"' "+
+		"order by date desc, time desc "+
+		"limit 20";
+
 		rs = stmt.executeQuery(sql);
 		int count = 0;
 		while(rs.next()){
+			String statusID = rs.getString("statusID");
+//			String userID1 = rs.getString("userID");
 			String content = rs.getString("content");
 			String dateTime = rs.getString("date") + " " + rs.getString("time");
-			result[count][0] = content;
-			result[count][1] = dateTime;
+			result[count][0] = statusID;
+			result[count][1] = userID;
+			result[count][2] = content;
+			result[count][3] = dateTime;
 			count ++;
 		}
 		return result;

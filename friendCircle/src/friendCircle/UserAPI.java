@@ -83,4 +83,13 @@ public class UserAPI extends SQLmanager {
 		close();
 		return info;
 	}
+	public static String getUserNameByID(String userID) throws Exception{
+		startMySQL();
+		String sql = "SELECT userName FROM `friendCircle`.`user` WHERE userID='"+userID+"'";
+		rs = stmt.executeQuery(sql);
+		if(rs.next()){
+			return rs.getString("userName");
+		}
+		return null;
+	}
 }

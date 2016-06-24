@@ -19,5 +19,5 @@ create table `comment`(
 
 insert into `comment` values(1, 2, 1, 1, '2016-06-20', '14:05:20', '哈哈什么？');
 insert into `comment` values(2, 1, 2, 1, '2016-06-20', '14:06:20', '我也不知道，就想哈哈');
-insert into `comment`(userID,statusID,`date`,`time`,content) values(3,3,CURDATE(),CURTIME(),'学婊。。。');
-insert into `comment`(userID,statusID,`date`,`time`,content) values(2,3,CURDATE(),CURTIME(),'你才学婊');
+insert into `comment`(userID,targetUserID,statusID,`date`,`time`,content) values(3, 2, 3,CURDATE(),CURTIME(),'学婊。。。');
+insert into `comment`(userID,targetUserID,statusID,`date`,`time`,content) values(2, 3, 3,CURDATE(),CURTIME(),'你才学婊');
