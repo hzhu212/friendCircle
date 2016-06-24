@@ -96,7 +96,7 @@
 						aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">个人信息修改</h4>
 				</div>
-				<form class="form-signin" action="dosignup.jsp" method="post">
+				<form class="form-signin" action="doinfo.jsp" method="post">
 					<input type="email" class="input-block-level" name="email" placeholder="电子邮箱"> 
 					<p>性别：<input type="radio" name="sex" value="male">Male（男）<input type="radio" name="sex" value="female">Female（女）<br></p>
 					<input type="text" class="input-block-level" name="signature" placeholder="个性签名"> 
