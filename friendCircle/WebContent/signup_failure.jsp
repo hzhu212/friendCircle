@@ -64,6 +64,9 @@ body {
 			<!--         <label class="checkbox">
           <input type="checkbox" value="remember-me"> 记住我
         </label> -->
+        	<font color="#FF0000">注册信息有误！请重试</font>
+        	<br>
+        	<br> 
 			<button class="btn btn-large btn-primary" type="submit">注册</button>
 			<a href="login.jsp" class="btn-large pull-right">登录</a>
 		</form>
