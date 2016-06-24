@@ -65,6 +65,7 @@ body {
           <input type="checkbox" value="remember-me"> 记住我
         </label> -->
 			<button class="btn btn-large btn-primary" type="submit">注册</button>
+			<a href="home.jsp" class="btn-large pull-right">返回首页</a>
 			<a href="login.jsp" class="btn-large pull-right">登录</a>
 		</form>
 
