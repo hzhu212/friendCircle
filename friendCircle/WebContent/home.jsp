@@ -5,7 +5,7 @@
 <html lang="zh-CN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>FriendCircle Homepage</title>
+    <title>FriendCircle HomePage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -77,7 +77,7 @@
       <hr>
 
       <div class="footer">
-        <p>&copy;Copyright ©&copy; 2016 FriendCircle  friendcircle.com All Rights Reserved. 备案号：京ICP备00000000号-0</p>
+        <p>&copy;Copyright ©&copy; 2016 FriendCircle  friendcircle.com All Rights Reserved.  By 马赞彭、仇立松、朱贺</p>
       </div>
 
     </div> <!-- /container -->
