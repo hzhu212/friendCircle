@@ -59,18 +59,29 @@
 		</div>
 	</div>
 	<%
-		String[] userInfo;
+		String userName=session.getAttribute("loginUser").toString();
+		String[] userInfo=UserAPI.getUser(userName);
 		out.print("	<div class=\"container container-narrow\" style=\"margin-top: 100px;\">" + "<div class=\"row\">"
 				+ "<div class=\"span7 offset2\">" + "<div class=\"media\">" + "<a class=\"pull-left\" href=\"#\">"
-				+ "<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"å¤´å\" src=\"./bootstrap/img/display-photo/test1.jpg\" style=\"width: 64px; height: 64px;\">"
-				+ "</a>" + "<div class=\"media-body\">" + "<a class=\"media-heading lead\" href=\"#\">Haley</a>"
-				+ "<p>这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。</p>"
-				+ "<p class=\"muted\">" + "<em>2016-06-24 08:30:00</em>" + "</p>"
-				+ "<div class=\"well well-small\">" + "<div>"
-				+ "<a href=\"#\">zhang</a><span> 回复 </span><a href=\"#\">Haley</a><span>:"
-				+ "</span> <span>哈哈哈</span>" + "</div>" + "<div>"
-				+ "<a href=\"#\">Haley</a><span> 回复 </span><a href=\"#\">zhang</a><span>:"
-				+ "</span> <span>哈哈哈啦啦啦啦啦啦啦哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>" + "</div></div></div></div></div></div></div>");
+				+ "<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"无法加载\""
+				/*+"src=\"./bootstrap/img/display-photo/test1.jpg\""*/
+				+"src=\""+userInfo[5]+"\""//头像图片路径
+				+"style=\"width: 64px; height: 64px;\">"
+				+ "</a>" + "<div class=\"media-body\">" + "<a class=\"media-heading lead\" href=\"#\">用户名："+userInfo[1]+"</a>"
+				//+ "<p>这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。</p>"
+				//+"<p>用户名："+userInfo[1]+"</p><br>"
+				+"<p>email: "+userInfo[3]+"</p><br>"
+				+"<p>个性签名："+userInfo[4]+"</p><br>"
+				+"<p>性别："+userInfo[6]+"</p><br>"
+				+"<p>生日："+userInfo[7]+"</p><br>"
+				+"<p>城市："+userInfo[8]+"</p><br>"
+				//+ "<p class=\"muted\">" + "<em>2016-06-24 08:30:00</em>" + "</p>"
+				//+ "<div class=\"well well-small\">" + "<div>"
+				//+ "<a href=\"#\">zhang</a><span> 回复 </span><a href=\"#\">Haley</a><span>:"
+				//+ "</span> <span>哈哈哈</span>" + "</div>" + "<div>"
+				//+ "<a href=\"#\">Haley</a><span> 回复 </span><a href=\"#\">zhang</a><span>:"
+				+ "</span> <span></span>" + "</div></div></div></div></div></div>");
+		
 	%>
 	<!-- Le javascript
   ================================================== -->

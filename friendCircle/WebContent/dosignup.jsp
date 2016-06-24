@@ -13,7 +13,7 @@
 	}
 	else{
 		userInfo=new String[]{
-			"d","123","","","","","",""
+			userName,passWord0,email,"","","男","1900-01-01",""
 		};
 		UserAPI.addUser(userInfo);
 		response.sendRedirect("login.jsp");
