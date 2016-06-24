@@ -66,7 +66,7 @@ body {
 				value="remember-password"> 记住密码
 			</label>
 			<button class="btn btn-large btn-primary" type="submit">登录</button>
-			<a href="signin.jsp" class="btn-large pull-right">注册</a>
+			<a href="signup.jsp" class="btn-large pull-right">注册</a>
 		</form>
 
 	</div>
