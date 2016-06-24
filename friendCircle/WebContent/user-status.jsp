@@ -1,4 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page import="util.Util" %>
+<%@page import="friendCircle.StatusAPI" %>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -15,7 +18,6 @@
 </head>
 
 <body>
-
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -30,9 +32,8 @@
         <div class="nav-collapse collapse">
 
           <ul class="nav">
-            <li class="active">
-              <a href="user-status.jsp">我的首页</a>
-            </li>
+            <li><a href="user-homepage.jsp">我的首页</a></li>
+            <li class="active"><a href="user-status.jsp">我的状态</a></li>
             <li><a href="user-friends.jsp">我的好友</a></li>
             <li><a href="user-info.jsp">个人信息</a></li>
           </ul>
@@ -40,11 +41,39 @@
           <form class="navbar-search pull-left">
             <input type="text" class="search-query" placeholder="搜索好友">
           </form>
+          
+          <ul class="nav pull-right">
+<!--             <li><a href="#">退出</a></li>
+            <li class="divider"></li> -->
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户名
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu role="menu" aria-labelledby="dLabel"">
+                <li><a href="#">退出</a></li>
+              </ul>
+            </li>
+          </ul>
 
         </div>
       </div>
     </div>
   </div>
+
+<%
+	out.println("<br><br><br><br><br><br>");
+	out.println(Util.getMD5("hhh")+"<br>");
+	out.println("现在时间是："+(new Date()).toString()+"<br>");
+	String[][] allStatus = StatusAPI.getStatusByUserID("1");
+	out.println(allStatus[0][0]);
+	for(int i=0; i<allStatus.length; i++){
+		String content = allStatus[i][0];
+		String time = allStatus[i][1];
+		if(time==null) break;
+		out.println(content + "<br>");
+		out.println(time + "<br>");
+	}
+%>
 
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">
@@ -152,6 +181,7 @@
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="./bootstrap/js/jquery-3.0.0.min.js"></script>
+  <script src="./bootstrap/js/bootstrap.js"></script>
 
 </body>
 </html>

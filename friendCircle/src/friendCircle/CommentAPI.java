@@ -50,4 +50,19 @@ public class CommentAPI extends SQLmanager {
 		stmt.executeQuery(sql);
 		close();
 	}
+	public static String[][] getCommentsByStatusID(String statusID) throws Exception{
+		startMySQL();
+		String[][] result = new String[100][3];
+		String sql = "select c.userID,r.targetID,c.content from `friendCircle`.`comment` as c, `friendCircle`.`reply` as r where c.`statusID`='"+statusID+"' and c.commentID=r.commentID order by c.date, c.time limit 100";
+		rs = stmt.executeQuery(sql);
+		int count = 0;
+		while(rs.next()){
+			String content = rs.getString("content");
+			String dateTime = rs.getString("date") + " " + rs.getString("time");
+			result[count][0] = content;
+			result[count][1] = dateTime;
+			count ++;
+		}
+		return result;
+	}
 }
