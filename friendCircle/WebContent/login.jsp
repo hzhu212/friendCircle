@@ -69,6 +69,7 @@ body {
 			<a href="home.jsp" class="btn-large pull-right">返回首页</a>
 			<a href="signup.jsp" class="btn-large pull-center">注册</a>
 		</form>
+		
 	</div>
 	<!-- /container -->
 
