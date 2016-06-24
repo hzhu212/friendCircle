@@ -3,7 +3,11 @@
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page import="friendCircle.UserAPI" %>
 <%
+	/*
+	*处理上传图片-------------------------------------------
+	*/
 	response.setContentType("text/html");
 	//   图片上传路径
 	String uploadPath = request.getSession().getServletContext().getRealPath("/") + "upload/images/";
@@ -12,6 +16,7 @@
 	//   图片网络相对路径
 	String imagePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ request.getContextPath() + "/";
+	String picture="";
 	//   文件夹不存在就自动创建：
 	if (!new File(uploadPath).isDirectory())
 		new File(uploadPath).mkdirs();
@@ -59,6 +64,7 @@
 				File f1 = new File(uploadPath + destinationfileName);
 				file.write(f1);
 				out.print(sourcefileName + "成功上传！");
+				picture=imagePath + "upload/images/" + destinationfileName;
 				out.print("<img src=" + imagePath + "upload/images/" + destinationfileName + ">");
 			} else {
 				out.println("上传文件出错，只能上传 *.jpg , *.gif");
@@ -69,6 +75,35 @@
 	catch (Exception e) {
 		//   可以跳转出错页面
 	}
+	/*
+	* 处理其它信息------------------------------------------
+	*/
+	/*
+	*默认，未被修改的信息
+	*/
+	String userName=session.getAttribute("loginUser").toString();
+	String[] pastDate=UserAPI.getUser(userName);
+	String passWord=pastDate[1];
+	String userId=pastDate[0];
+	/*
+	* ‘可能’ 被修改的信息
+	* 用String param=输入为空？原值:改变值；来判断
+	*/
+	if(picture.equals(""))
+		picture=pastDate[2];
+	
+	String sex=request.getParameter("sex").equals("")?pastDate[6]:request.getParameter("sex");	
+	String email=request.getParameter("email").equals("")?pastDate[3]:request.getParameter("email");
+	String signature=request.getParameter("signature").equals("")?pastDate[4]:request.getParameter("signature");
+	String birth=request.getParameter("birthday").equals("")?pastDate[7]:request.getParameter("birthday");
+	String city=request.getParameter("city").equals("")?pastDate[8]:request.getParameter("city");
+	/*
+	*更新数据库
+	*/
+	String[] userDate=new String[]{
+		userId,userName,passWord,email,signature,picture,sex,birth,city
+	};
+	UserAPI.addUser(userDate);
 	out.flush();
 	out.close();
 %>

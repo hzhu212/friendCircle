@@ -6,7 +6,7 @@
 	String passWord=request.getParameter("password");
 	if(UserAPI.judgeLegal(userName,passWord)){
 		session.setAttribute("loginUser", userName);
-	    request.getRequestDispatcher("userPage.jsp").forward(request, response);
+	    request.getRequestDispatcher("user-info.jsp").forward(request, response);
 	}
 	else{
 		response.sendRedirect("login_failure.jsp");
