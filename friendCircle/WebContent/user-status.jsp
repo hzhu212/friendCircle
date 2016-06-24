@@ -58,35 +58,11 @@
     </div>
   </div>
 
-<%-- <%
-  out.println("<br><br><br><br><br><br>");
-  out.println(Util.getMD5("hhh")+"<br>");
-  out.println("现在时间是："+(new Date()).toString()+"<br>");
-  String[][] allStatus = StatusAPI.getStatusByUserID("1");
-  for(int i=0; i<allStatus.length; i++){
-    String statusID = allStatus[i][0];
-    String content = allStatus[i][1];
-    String time = allStatus[i][2];
-    if(statusID==null) break;
-    out.println(statusID + "<br>");
-    out.println(content + "<br>");
-    out.println(time + "<br>");
-    String[][] allComments = CommentAPI.getCommentsByStatusID(statusID);
-    for(int j=0; j<allComments.length; j++){
-    	String from = allComments[j][1];
-    	String to = allComments[j][2];
-    	String comContent = allComments[j][3];
-    	if(from==null) break;
-    	out.println(from+" 回复 "+to+": "+comContent+"<br>");
-    }
-  }
-%> --%>
-
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">
       <div class="span7 offset2">
-
-        <%
+      
+      <%
           String userID = "1";
           String[][] allStatus = StatusAPI.getStatusByUserID(userID);
           for(int i=0; i<allStatus.length; i++){
@@ -100,7 +76,7 @@
             out.println(
             "<div class=\"media\"> "+
             "<a class=\"pull-left\" href=\"#\"> "+
-            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/test"+userIDTemp+".jpg\" style=\"width: 64px; height: 64px;\"> "+
+            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userIDTemp+".png\" style=\"width: 64px; height: 64px;\"> "+
             "  </a> "+
             "  <div class=\"media-body\"> "+
             "  <a class=\"media-heading lead\" href=\"#\">"+userName+"</a> "+
@@ -108,53 +84,33 @@
             "    <p class=\"muted\"><em>"+time+"</em></p> ");
 
             String[][] allComments = CommentAPI.getCommentsByStatusID(statusID);
+            boolean isEmpty = (allComments[0][1]==null);
+            if(!isEmpty){
+            	out.println("<div class=\"well well-small\"> ");
+            }
             for(int j=0; j<allComments.length; j++){
               String from = allComments[j][1];
               String to = allComments[j][2];
               String comContent = allComments[j][3];
               if(from==null) break;
               out.println(
-              "    <div class=\"well well-small\"> "+
               "      <div> "+
               "      <a href=\"#\">"+from+"</a><span> 回复 </span><a href=\"#\">"+to+"</a><span>: </span> "+
-              "        <span>"+content+"</span> "+
-              "      </div> "+
+              "        <span>"+comContent+"</span> "+
               "    </div> ");
-
-              out.println(
-              "  </div> "+
-              "</div>"
-              );
             }
+            if(!isEmpty){
+            	out.println("</div>");
+            }
+            out.println(
+            "  </div> "+
+            "</div>"
+            );
+          }
         %>
 
-<!--         <div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64" alt="头像" src="./bootstrap/img/display-photo/test1.jpg" style="width: 64px; height: 64px;">
-  </a>
-  <div class="media-body">
-    <a class="media-heading lead" href="#">Haley</a>
-    <p>这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。</p>
-    <p class="muted"><em>2016-06-24 08:30:00</em></p>
-
-    <div class="well well-small">
-      <div>
-        <a href="#">zhang</a><span> 回复 </span><a href="#">Haley</a><span>: </span>
-        <span>哈哈哈</span>
-      </div>
-      <div>
-        <a href="#">Haley</a><span> 回复 </span><a href="#">zhang</a><span>: </span>
-        <span>哈哈哈啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了了了了了了了了了了了了了了了了了了了哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
       </div>
     </div>
-
-  </div>
-</div> -->
-
-      </div>
-    </div>
-
-
   </div>
 
   <!-- Le javascript

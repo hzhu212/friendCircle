@@ -90,6 +90,7 @@ public class UserAPI extends SQLmanager {
 		if(rs.next()){
 			return rs.getString("userName");
 		}
+		close();
 		return null;
 	}
 }

@@ -74,6 +74,7 @@ public class StatusAPI extends SQLmanager {
 			result[count][3] = dateTime;
 			count ++;
 		}
+		close();
 		return result;
 	}
 }

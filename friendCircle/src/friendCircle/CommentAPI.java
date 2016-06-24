@@ -74,6 +74,7 @@ public class CommentAPI extends SQLmanager {
 			result[count][3] = content;
 			count ++;
 		}
+		close();
 		return result;
 	}
 }
