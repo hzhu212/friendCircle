@@ -52,17 +52,29 @@ public class CommentAPI extends SQLmanager {
 	}
 	public static String[][] getCommentsByStatusID(String statusID) throws Exception{
 		startMySQL();
-		String[][] result = new String[100][3];
-		String sql = "select c.userID,r.targetID,c.content from `friendCircle`.`comment` as c, `friendCircle`.`reply` as r where c.`statusID`='"+statusID+"' and c.commentID=r.commentID order by c.date, c.time limit 100";
+		String[][] result = new String[100][4];
+		
+		String sql = 
+		"SELECT t.commentID, u1.userName as `from`, u2.userName as `to`, t.content "+
+		"FROM friendCircle.user as u1, friendCircle.user as u2, (SELECT commentID,userID,targetUserID,content,date,time "+
+		"	FROM friendCircle.comment WHERE statusID='"+statusID+"') as t "+
+		"WHERE u1.userID=t.userID AND u2.userID=t.targetUserID "+
+		"order by t.date, t.time limit 100 ";
+
 		rs = stmt.executeQuery(sql);
 		int count = 0;
 		while(rs.next()){
+			String commentID = rs.getString("commentID");
+			String fromUser = rs.getString("from");
+			String toUser = rs.getString("to");
 			String content = rs.getString("content");
-			String dateTime = rs.getString("date") + " " + rs.getString("time");
-			result[count][0] = content;
-			result[count][1] = dateTime;
+			result[count][0] = commentID;
+			result[count][1] = fromUser;
+			result[count][2] = toUser;
+			result[count][3] = content;
 			count ++;
 		}
+		close();
 		return result;
 	}
 }

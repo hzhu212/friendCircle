@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="util.Util" %>
-<%@page import="friendCircle.StatusAPI" %>
+<%@page import="friendCircle.*" %>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -43,8 +43,6 @@
           </form>
           
           <ul class="nav pull-right">
-<!--             <li><a href="#">退出</a></li>
-            <li class="divider"></li> -->
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户名
                 <b class="caret"></b>
@@ -60,121 +58,59 @@
     </div>
   </div>
 
-<%
-	out.println("<br><br><br><br><br><br>");
-	out.println(Util.getMD5("hhh")+"<br>");
-	out.println("现在时间是："+(new Date()).toString()+"<br>");
-	String[][] allStatus = StatusAPI.getStatusByUserID("1");
-	out.println(allStatus[0][0]);
-	for(int i=0; i<allStatus.length; i++){
-		String content = allStatus[i][0];
-		String time = allStatus[i][1];
-		if(time==null) break;
-		out.println(content + "<br>");
-		out.println(time + "<br>");
-	}
-%>
-
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">
       <div class="span7 offset2">
+      
+      <%
+          String userID = "1";
+          String[][] allStatus = StatusAPI.getStatusByUserID(userID);
+          for(int i=0; i<allStatus.length; i++){
+            String statusID = allStatus[i][0];
+            String userIDTemp = allStatus[i][1];
+            String content = allStatus[i][2];
+            String time = allStatus[i][3];
+            String userName = UserAPI.getUserNameByID(userIDTemp);
+            if(statusID==null) break;
 
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" data-src="holder.js/64x64" alt="å¤´å" src="./bootstrap/img/display-photo/test1.jpg" style="width: 64px; height: 64px;">
-          </a>
-          <div class="media-body">
-            <a class="media-heading lead" href="#">Haley</a>
-            <p>这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。</p>
-            <p class="muted"><em>2016-06-24 08:30:00</em></p>
+            out.println(
+            "<div class=\"media\"> "+
+            "<a class=\"pull-left\" href=\"#\"> "+
+            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userIDTemp+".png\" style=\"width: 64px; height: 64px;\"> "+
+            "  </a> "+
+            "  <div class=\"media-body\"> "+
+            "  <a class=\"media-heading lead\" href=\"#\">"+userName+"</a> "+
+            "    <p>"+content+"</p> "+
+            "    <p class=\"muted\"><em>"+time+"</em></p> ");
 
-            <div class="well well-small">
-              <div>
-                <a href="#">zhang</a><span> 回复 </span><a href="#">Haley</a><span>: </span>
-                <span>哈哈哈</span>
-              </div>
-              <div>
-                <a href="#">Haley</a><span> 回复 </span><a href="#">zhang</a><span>: </span>
-                <span>哈哈哈啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了了了了了了了了了了了了了了了了了了了哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" data-src="holder.js/64x64" alt="å¤´å" src="./bootstrap/img/display-photo/test1.jpg" style="width: 64px; height: 64px;">
-          </a>
-          <div class="media-body">
-            <a class="media-heading lead" href="#">Haley</a>
-            <p>这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。</p>
-            <p class="muted"><em>2016-06-24 08:30:00</em></p>
-
-            <div class="well well-small">
-              <div>
-                <a href="#">zhang</a><span> 回复 </span><a href="#">Haley</a><span>: </span>
-                <span>哈哈哈</span>
-              </div>
-              <div>
-                <a href="#">Haley</a><span> 回复 </span><a href="#">zhang</a><span>: </span>
-                <span>哈哈哈啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了了了了了了了了了了了了了了了了了了了哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" data-src="holder.js/64x64" alt="å¤´å" src="./bootstrap/img/display-photo/test1.jpg" style="width: 64px; height: 64px;">
-          </a>
-          <div class="media-body">
-            <a class="media-heading lead" href="#">Haley</a>
-            <p>这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。</p>
-            <p class="muted"><em>2016-06-24 08:30:00</em></p>
-
-            <div class="well well-small">
-              <div>
-                <a href="#">zhang</a><span> 回复 </span><a href="#">Haley</a><span>: </span>
-                <span>哈哈哈</span>
-              </div>
-              <div>
-                <a href="#">Haley</a><span> 回复 </span><a href="#">zhang</a><span>: </span>
-                <span>哈哈哈啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了了了了了了了了了了了了了了了了了了了哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="media">
-          <a class="pull-left" href="#">
-            <img class="media-object" data-src="holder.js/64x64" alt="å¤´å" src="./bootstrap/img/display-photo/test1.jpg" style="width: 64px; height: 64px;">
-          </a>
-          <div class="media-body">
-            <a class="media-heading lead" href="#">Haley</a>
-            <p>这部影片就像是《黑客帝国》加上《纽约提喻法》，反物理学的探讨、精彩的动作场面、具有冲击力的情感、以及莱昂纳多令人吃惊的表演，都让人沉迷不已，这是诺兰电影的一个全新领域。</p>
-            <p class="muted"><em>2016-06-24 08:30:00</em></p>
-
-            <div class="well well-small">
-              <div>
-                <a href="#">zhang</a><span> 回复 </span><a href="#">Haley</a><span>: </span>
-                <span>哈哈哈</span>
-              </div>
-              <div>
-                <a href="#">Haley</a><span> 回复 </span><a href="#">zhang</a><span>: </span>
-                <span>哈哈哈啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦了了了了了了了了了了了了了了了了了了了哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
+            String[][] allComments = CommentAPI.getCommentsByStatusID(statusID);
+            boolean isEmpty = (allComments[0][1]==null);
+            if(!isEmpty){
+            	out.println("<div class=\"well well-small\"> ");
+            }
+            for(int j=0; j<allComments.length; j++){
+              String from = allComments[j][1];
+              String to = allComments[j][2];
+              String comContent = allComments[j][3];
+              if(from==null) break;
+              out.println(
+              "      <div> "+
+              "      <a href=\"#\">"+from+"</a><span> 回复 </span><a href=\"#\">"+to+"</a><span>: </span> "+
+              "        <span>"+comContent+"</span> "+
+              "    </div> ");
+            }
+            if(!isEmpty){
+            	out.println("</div>");
+            }
+            out.println(
+            "  </div> "+
+            "</div>"
+            );
+          }
+        %>
 
       </div>
     </div>
-
-
   </div>
 
   <!-- Le javascript
