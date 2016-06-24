@@ -49,4 +49,20 @@ public class StatusAPI extends SQLmanager {
 		stmt.executeQuery(sql);
 		close();
 	}
+	//返回某个用户最近的所有状态
+	public static String[][] getStatusByUserID(String userID) throws Exception{
+		startMySQL();
+		String[][] result = new String[20][2];
+		String sql = "select content,date,time from `friendCircle`.`status` where `userID`='"+userID+"' order by date desc, time desc limit 20";
+		rs = stmt.executeQuery(sql);
+		int count = 0;
+		while(rs.next()){
+			String content = rs.getString("content");
+			String dateTime = rs.getString("date") + " " + rs.getString("time");
+			result[count][0] = content;
+			result[count][1] = dateTime;
+			count ++;
+		}
+		return result;
+	}
 }
