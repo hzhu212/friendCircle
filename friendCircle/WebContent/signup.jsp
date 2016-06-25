@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login FriendCircle</title>
+<title>Sign in FriendCircle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -18,7 +18,7 @@ body {
 	background-color: #f5f5f5;
 }
 
-.form-login {
+.form-signin {
 	max-width: 300px;
 	padding: 19px 29px 29px;
 	margin: 0 auto 20px;
@@ -33,19 +33,16 @@ body {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
 
-.form-login .form-login-heading, .form-login .checkbox {
+.form-signin .form-signin-heading, .form-signin .checkbox {
 	margin-bottom: 10px;
 }
 
-.form-login input[type="text"], .form-login input[type="password"] {
+.form-signin input[type="text"], .form-signin input[type="email"],
+	.form-signin input[type="password"] {
 	font-size: 16px;
 	height: auto;
 	margin-bottom: 15px;
 	padding: 7px 9px;
-}
-
-.form-login a {
-	float: right;
 }
 </style>
 <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -55,21 +52,23 @@ body {
 
 	<div class="container">
 
-		<form class="form-login" action="dologin.jsp" method="post">
-			<h2 class="form-login-heading">登录</h2>
-			<input type="text" class="input-block-level" name="username"
-				placeholder="请输入用户名"> <input type="password"
-				class="input-block-level" name="password" placeholder="请输入密码">
-			<label class="checkbox"> <input type="checkbox"
-				value="remember-username"> 记住用户名
-			</label> <label class="checkbox"> <input type="checkbox"
-				value="remember-password"> 记住密码
-			</label>
-			<button class="btn btn-large btn-primary" type="submit">登录</button>
+		<form class="form-signin" action="dosignup.jsp" method="post">
+			<h2 class="form-signin-heading">注册</h2>
+			<input type="email" class="input-block-level" name="email"
+				placeholder="电子邮箱" required> <input type="password"
+				name="password0" class="input-block-level" placeholder="请设定密码"
+				required> <input type="password" name="password1"
+				class="input-block-level" placeholder="请再次确认密码" required> <input
+				type="text" name="username" class="input-block-level"
+				placeholder="请设定要显示的用户名" required>
+			<!--         <label class="checkbox">
+          <input type="checkbox" value="remember-me"> 记住我
+        </label> -->
+			<button class="btn btn-large btn-primary" type="submit">注册</button>
 			<a href="home.jsp" class="btn-large pull-right">返回首页</a>
-			<a href="signup.jsp" class="btn-large pull-center">注册</a>
+			<a href="login.jsp" class="btn-large pull-right">登录</a>
 		</form>
-		
+
 	</div>
 	<!-- /container -->
 

@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Login FriendCircle</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -65,11 +65,14 @@ body {
 			</label> <label class="checkbox"> <input type="checkbox"
 				value="remember-password"> 记住密码
 			</label>
+			<font color="#FF0000">用户名或密码错误！</font> 
+			<br>
+			<br>
 			<button class="btn btn-large btn-primary" type="submit">登录</button>
 			<a href="home.jsp" class="btn-large pull-right">返回首页</a>
-			<a href="signup.jsp" class="btn-large pull-center">注册</a>
+			<a href="signin.jsp" class="btn-large pull-right">注册</a>
 		</form>
-		
+
 	</div>
 	<!-- /container -->
 

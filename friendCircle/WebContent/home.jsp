@@ -5,7 +5,7 @@
 <html lang="zh-CN">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>FriendCircle Homepage</title>
+    <title>FriendCircle HomePage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -70,13 +70,14 @@
       <div class="jumbotron">
         <h1>FriendCircle!</h1>
         <p class="lead">FriendCircle, share wonderful moments with your friends</p>
-        <a class="btn btn-large btn-success" href="signin.jsp">注册</a>
+        <a class="btn btn-large btn-success" href="login.jsp">登陆</a>
+        <a class="btn btn-large btn-success" href="signup.jsp">注册</a>
       </div>
 
       <hr>
 
       <div class="footer">
-        <p>&copy;Copyright ©&copy; 2016 FriendCircle  friendcircle.com All Rights Reserved. 备案号：京ICP备00000000号-0</p>
+        <p>&copy;Copyright ©&copy; 2016 FriendCircle  friendcircle.com All Rights Reserved.  By 马赞彭、仇立松、朱贺</p>
       </div>
 
     </div> <!-- /container -->
