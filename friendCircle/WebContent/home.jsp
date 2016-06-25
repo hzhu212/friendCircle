@@ -16,6 +16,8 @@
       body {
         padding-top: 20px;
         padding-bottom: 40px;
+        background-image: url("./bootstrap/img/background/0.jpg");
+        background-size: cover;
       }
 
       /* Custom container */
@@ -52,7 +54,7 @@
     <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
-  <body background=".\bootstrap\img\background\0.jpg">
+  <body>
     <div class="container-narrow">
 
       <div class="masthead">
@@ -64,7 +66,7 @@
         <h3 class="muted">FriendCircle</h3>
       </div>
 
-      <hr>
+      <br>
 
       <div class="jumbotron">
         <h1>FriendCircle!</h1>
@@ -73,10 +75,11 @@
         <a class="btn btn-large btn-success" href="signup.jsp">注册</a>
       </div>
 
-      <hr>
+      <br>
 
       <div class="footer">
-        <p>&copy;Copyright ©&copy; 2016 FriendCircle  friendcircle.com All Rights Reserved.  By 马赞彭、仇立松、朱贺</p>
+        <p class="text-center">&copy;Copyright 2016 FriendCircle  friendcircle.com All Rights Reserved.</p>
+        <p class="text-center text-error">2016 《数据库概论》 By 马赞彭、仇立松、朱贺</p>
       </div>
 
     </div> <!-- /container -->

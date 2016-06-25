@@ -70,11 +70,11 @@
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
       	  
-     	  String hostUserID = "1";
-          String hostUserName = "user1"; 
-/*           String hostUserName = session.getAttribute("loginUser").toString();
+/*      	  String hostUserID = "1";
+          String hostUserName = "user1";  */
+          String hostUserName = session.getAttribute("loginUser").toString();
        	  String[] hostInfo=userAPI.getUser(hostUserName);
-          String hostUserID = hostInfo[0]; */
+          String hostUserID = hostInfo[0];
 
       	  
           ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(hostUserID);

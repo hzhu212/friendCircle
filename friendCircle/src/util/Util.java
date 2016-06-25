@@ -31,4 +31,8 @@ public  class  Util{
         }  
         return s;  
     }
+    
+    public static void main(String[] args) {
+		System.out.println(getMD5("123456"));
+	}
 } 

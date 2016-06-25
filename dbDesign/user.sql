@@ -17,6 +17,6 @@ CREATE TABLE `user` (
 	UNIQUE (`userName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4080 DEFAULT CHARSET=utf8;
 
-insert into `user` values(1,'user1','123456','user1@163.com','哈哈哈hhh','image/displayPhoto/1.png','男','1998-03-03','北京');
-insert into `user` values(2,'user2','123456','user2@163.com','哈哈哈hhh','image/displayPhoto/2.png','女','1999-03-03','上海');
-insert into `user` values(3,'user3','123456','user3@163.com','哈哈哈hhh','image/displayPhoto/3.png','','1997-03-03','郑州');
+insert into `user` values(1,'user1','e10adc3949ba59abbe56e057f20f883e','user1@163.com','哈哈哈hhh','image/displayPhoto/1.png','男','1998-03-03','北京');
+insert into `user` values(2,'user2','e10adc3949ba59abbe56e057f20f883e','user2@163.com','哈哈哈hhh','image/displayPhoto/2.png','女','1999-03-03','上海');
+insert into `user` values(3,'user3','e10adc3949ba59abbe56e057f20f883e','user3@163.com','哈哈哈hhh','image/displayPhoto/3.png','','1997-03-03','郑州');

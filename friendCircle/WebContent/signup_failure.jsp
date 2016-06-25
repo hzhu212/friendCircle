@@ -16,6 +16,8 @@ body {
 	padding-top: 40px;
 	padding-bottom: 40px;
 	background-color: #f5f5f5;
+	background-image: url("./bootstrap/img/background/0.jpg");
+	background-size: cover;
 }
 
 .form-signin {
@@ -48,7 +50,7 @@ body {
 <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 
-<body background=".\bootstrap\img\background\0.jpg">
+<body>
 
 	<div class="container">
 
