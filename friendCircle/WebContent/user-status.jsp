@@ -84,29 +84,31 @@
             "    <p>"+content+"</p> "+
             "    <p class=\"muted\"><em>"+time+"</em></p> ");
 
-            String[][] allComments = commentAPI.getCommentsByStatusID(statusID);
-            boolean isEmpty = (allComments[0][1]==null);
+            ArrayList<HashMap<String,String>> commentList = commentAPI.getCommentsByStatusID(statusID);
+            boolean isEmpty = (commentList.isEmpty());
+            
             if(!isEmpty){
             	out.println("<div class=\"well well-small\"> ");
             }
-            for(int j=0; j<allComments.length; j++){
-              String from = allComments[j][1];
-              String to = allComments[j][2];
-              String comContent = allComments[j][3];
-              if(from==null) break;
+            for(HashMap<String,String> aComment: commentList){
+              String from = aComment.get("fromUserName");
+              String to = aComment.get("toUserName");
+              String comContent = aComment.get("content");
+              
               out.println(
               "      <div> "+
               "      <a href=\"#\">"+from+"</a><span> 回复 </span><a href=\"#\">"+to+"</a><span>: </span> "+
               "        <span>"+comContent+"</span> "+
               "    </div> ");
             }
+            
             if(!isEmpty){
               out.println("</div>");
             }
             
             out.println(
-            "  <div class=\"input-append\"> "+
-            "    <input class=\"span7\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
+            "  <div class=\"input-append pull-right\"> "+
+            "    <input class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
             "    <button class=\"btn\" type=\"button\">确认</button> "+
             "  </div> "
             );
