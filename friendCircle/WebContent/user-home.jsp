@@ -34,17 +34,22 @@
 			document.getElementById("writeStatus").value="";
 		}
 
-    function userNameClicked(userName,inputID){
+    function userNameClicked(userName,statusID){
       targetUserName = userName;
       if(inputDom !== ""){
         inputDom.placeholder = "发表评论";
       }
-      inputDom = document.getElementById(inputID);
+      inputDom = document.getElementById(statusID);
       inputDom.placeholder = "回复"+userName;
     }
 
-    function sendComment(statusID){
-
+    function sendComment(statusID,userName){
+      if(targetUserName === ""){
+        targetUserName = userName;
+        inputDom = document.getElementById(statusID);
+      }
+      commentContent = inputDom.value;
+      alert(statusID+"\n"+targetUserName+"\n"+commentContent);
     }
 	</script>
 
@@ -139,11 +144,11 @@
 
 					out.println(
 					"<div class=\"media\"> "+
-					"<a class=\"pull-left\" onclick=\"userNameClicked('"+userName+"','"+userName+"')\"> "+
+					"<a class=\"pull-left\" onclick=\"userNameClicked('"+userName+"','"+statusID+"')\"> "+
 					"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userID+".png\" style=\"width: 64px; height: 64px;\"> "+
 					"</a> "+
 					"<div class=\"media-body\"> "+
-					"<a class=\"media-heading lead\" onclick=\"userNameClicked('"+userName+"','"+userName+"')\">"+userName+"</a> "+
+					"<a class=\"media-heading lead\" onclick=\"userNameClicked('"+userName+"','"+statusID+"')\">"+userName+"</a> "+
 					"<p>"+content+"</p> "+
 					"<p class=\"muted\"><em>"+time+"</em></p> ");
 
@@ -160,7 +165,7 @@
 						
 						out.println(
 						"<div> "+
-						"<a onclick=\"userNameClicked('"+from+"','"+userName+"')\">"+from+"</a><span> 回复 </span><a onclick=\"userNameClicked('"+to+"','"+userName+"')\">"+to+"</a><span>: </span> "+
+						"<a onclick=\"userNameClicked('"+from+"','"+statusID+"')\">"+from+"</a><span> 回复 </span><a onclick=\"userNameClicked('"+to+"','"+statusID+"')\">"+to+"</a><span>: </span> "+
 						"<span>"+comContent+"</span> "+
 						"</div> ");
 					}
@@ -171,8 +176,8 @@
 					
 					out.println(
 					"<div class=\"input-append pull-right\"> "+
-					"<input id=\""+userName+"\" class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
-					"<button class=\"btn\" type=\"button\" onclick=\"sendComment('"+statusID+"')\">确认</button> "+
+					"<input id=\""+statusID+"\" class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
+					"<button class=\"btn\" type=\"button\" onclick=\"sendComment('"+statusID+"','"+userName+"')\">确认</button> "+
 					"</div> "
 					);
 
