@@ -100,8 +100,16 @@
               "    </div> ");
             }
             if(!isEmpty){
-            	out.println("</div>");
+              out.println("</div>");
             }
+            
+            out.println(
+            "  <div class=\"input-append\"> "+
+            "    <input class=\"span7\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
+            "    <button class=\"btn\" type=\"button\">确认</button> "+
+            "  </div> "
+            );
+
             out.println(
             "  </div> "+
             "</div>"
