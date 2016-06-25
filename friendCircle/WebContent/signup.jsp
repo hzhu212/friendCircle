@@ -48,7 +48,7 @@ body {
 <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 
-<body>
+<body background=".\bootstrap\img\background\0.jpg">
 
 	<div class="container">
 

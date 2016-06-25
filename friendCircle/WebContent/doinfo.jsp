@@ -1,13 +1,13 @@
 <%@ page language="java" import="java.util.*,java.io.*"
 	pageEncoding="UTF-8"%>
-<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
-<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload.*"%>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory.*"%>
 <%@ page import="org.apache.commons.fileupload.*"%>
 <%@ page import="friendCircle.UserAPI" %>
 <%
 	/*
 	*处理上传图片-------------------------------------------
-	*/
+	
 	response.setContentType("text/html");
 	//   图片上传路径
 	String uploadPath = request.getSession().getServletContext().getRealPath("/") + "upload/images/";
@@ -18,11 +18,13 @@
 			+ request.getContextPath() + "/";
 	String picture="";
 	//   文件夹不存在就自动创建：
+	
 	if (!new File(uploadPath).isDirectory())
 		new File(uploadPath).mkdirs();
 	if (!new File(tempPath).isDirectory())
 		new File(tempPath).mkdirs();
 	try {
+	
 		DiskFileUpload fu = new DiskFileUpload();
 		//   设置最大文件尺寸，这里是4MB
 		fu.setSizeMax(4194304);
@@ -40,7 +42,7 @@
 			String sourcefileName = file.getName();
 			if (sourcefileName != null
 					&& (sourcefileName.endsWith(".jpg") || sourcefileName.endsWith(".gif"))) {
-				//   在这里可以记录用户和文件信息,生成上传后的文件名
+				//  在这里可以记录用户和文件信息,生成上传后的文件名
 				String destinationfileName = null;
 				Random rd = new Random();
 				Calendar time = Calendar.getInstance();
@@ -64,7 +66,7 @@
 				File f1 = new File(uploadPath + destinationfileName);
 				file.write(f1);
 				out.print(sourcefileName + "成功上传！");
-				picture=imagePath + "upload/images/" + destinationfileName;
+				picture=uploadPath + "upload/images/" + destinationfileName;
 				out.print("<img src=" + imagePath + "upload/images/" + destinationfileName + ">");
 			} else {
 				out.println("上传文件出错，只能上传 *.jpg , *.gif");
@@ -75,24 +77,29 @@
 	catch (Exception e) {
 		//   可以跳转出错页面
 	}
+	*/
+	
+	
 	/*
 	* 处理其它信息------------------------------------------
 	*/
 	/*
 	*默认，未被修改的信息
 	*/
+	request.setCharacterEncoding("utf-8");//防止中文乱码
+	UserAPI u=new UserAPI();
 	String userName=session.getAttribute("loginUser").toString();
-	String[] pastDate=UserAPI.getUser(userName);
+	String[] pastDate=u.getUser(userName);
 	String passWord=pastDate[1];
 	String userId=pastDate[0];
 	/*
 	* ‘可能’ 被修改的信息
 	* 用String param=输入为空？原值:改变值；来判断
+	*
+	*if(picture.equals(""))
+	*	picture=pastDate[2];
 	*/
-	if(picture.equals(""))
-		picture=pastDate[2];
-	
-	String sex=request.getParameter("sex").equals("")?pastDate[6]:request.getParameter("sex");	
+	String sex=request.getParameter("sex");
 	String email=request.getParameter("email").equals("")?pastDate[3]:request.getParameter("email");
 	String signature=request.getParameter("signature").equals("")?pastDate[4]:request.getParameter("signature");
 	String birth=request.getParameter("birthday").equals("")?pastDate[7]:request.getParameter("birthday");
@@ -100,10 +107,12 @@
 	/*
 	*更新数据库
 	*/
+	String picture="./bootstrap/img/display-photo/3.png";
+	if(sex==null||sex.equals("0")) sex="男";
+	else sex="女";
 	String[] userDate=new String[]{
 		userId,userName,passWord,email,signature,picture,sex,birth,city
 	};
-	UserAPI.addUser(userDate);
-	out.flush();
-	out.close();
+	u.addUser(userDate);
+	response.sendRedirect("user-info.jsp");
 %>

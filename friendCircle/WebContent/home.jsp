@@ -52,8 +52,7 @@
     <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
   </head>
 
-  <body>
-
+  <body background=".\bootstrap\img\background\0.jpg">
     <div class="container-narrow">
 
       <div class="masthead">
@@ -70,7 +69,7 @@
       <div class="jumbotron">
         <h1>FriendCircle!</h1>
         <p class="lead">FriendCircle, share wonderful moments with your friends</p>
-        <a class="btn btn-large btn-success" href="login.jsp">登陆</a>
+        <a class="btn btn-large btn-success" href="login.jsp">登录</a>
         <a class="btn btn-large btn-success" href="signup.jsp">注册</a>
       </div>
 
@@ -81,7 +80,6 @@
       </div>
 
     </div> <!-- /container -->
-
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

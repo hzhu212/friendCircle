@@ -51,7 +51,7 @@ body {
 <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 
-<body>
+<body background=".\bootstrap\img\background\0.jpg">
 
 	<div class="container">
 
@@ -70,7 +70,7 @@ body {
 			<br>
 			<button class="btn btn-large btn-primary" type="submit">登录</button>
 			<a href="home.jsp" class="btn-large pull-right">返回首页</a>
-			<a href="signin.jsp" class="btn-large pull-right">注册</a>
+			<a href="signup.jsp" class="btn-large pull-right">注册</a>
 		</form>
 
 	</div>

@@ -36,7 +36,7 @@ public class UserAPI extends SQLmanager {
 		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userName='"+name+"'";
 		rs = stmt.executeQuery(sql);
 		if (rs.next())
-			if (rs.getString("password").equals(Util.getMD5(password)))
+			if (rs.getString("password").equals(password))
 				result = true;
 		
 		return result;
@@ -95,5 +95,23 @@ public class UserAPI extends SQLmanager {
 			result = rs.getString("userName");
 		}
 		return result;
+	}
+	public String[] getUserFromId(String id) throws Exception {	//返回用户信息
+		startMySQL();
+		String[] info = new String[9];
+		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userID='"+id+"'";
+		rs = stmt.executeQuery(sql);
+		if (rs.next()) {
+			info[0] = rs.getString("userID");
+			info[1] = rs.getString("userName");
+			info[2] = rs.getString("password");
+			info[3] = rs.getString("email");
+			info[4] = rs.getString("signature");
+			info[5] = rs.getString("displayPhoto");
+			info[6] = rs.getString("sex");
+			info[7] = rs.getString("birthday");
+			info[8] = rs.getString("city");
+		}
+		return info;
 	}
 }

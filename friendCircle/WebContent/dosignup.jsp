@@ -7,15 +7,17 @@
 	String passWord1 = Util.getMD5(request.getParameter("password1"));
 	String email=request.getParameter("email");
 	String[] userInfo;
+	
+	UserAPI signup=new UserAPI();
 	//密码输入错误or用户名被占用
-	if (!passWord0.equals(passWord1) || !UserAPI.judgeName(userName)) {
+	if (!passWord0.equals(passWord1) || !signup.judgeName(userName)) {
 		response.sendRedirect("signup_failure.jsp");
 	}
 	else{
 		userInfo=new String[]{
 			userName,passWord0,email,"","","男","1900-01-01",""
 		};
-		UserAPI.addUser(userInfo);
+		signup.addUser(userInfo);
 		response.sendRedirect("login.jsp");
 	}
 %>
