@@ -63,7 +63,7 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu role=" aria-labelledby="dLabel">
-								<li><a href="home.jsp">退出</a></li>
+								<li><a href="doLogOff.jsp">退出</a></li>
 							</ul>
 						</li>
 					</ul>

@@ -31,13 +31,12 @@ public class UserAPI extends SQLmanager {
 	}
 	public boolean judgeLegal(String name, String password) throws Exception {
 		startMySQL();
-		boolean result = false;
-		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userName='"+name+"'";
+		String sql = "SELECT password FROM `friendCircle`.`user` WHERE userName='"+name+"'";
 		rs = stmt.executeQuery(sql);
 		if (rs.next())
 			if (rs.getString("password").equals(password))
-				result = true;
-		return result;
+				return true;
+		return false;
 	}
 	public String addUser(String[] info) throws Exception {	//添加用户信息，返回自动生成的用户ID
 		startMySQL();

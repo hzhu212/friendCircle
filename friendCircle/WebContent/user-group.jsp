@@ -60,7 +60,7 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu role=" aria-labelledby="dLabel">
-								<li><a href="home.jsp">退出</a></li>
+								<li><a href="doLogOff.jsp">退出</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -70,8 +70,8 @@
 		</div>
 	</div>
 	<div class="container container-narrow" style="margin-top:50px;">
-    	<div class="row">
-      		<div class="span7 offset2">
+		<div class="row">
+			<div class="span7 offset2">
 				<div id="in" class="row">
 					<%
 					out.print("<h4>当前加入的群组：</h4>");
