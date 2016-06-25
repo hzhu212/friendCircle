@@ -7,7 +7,7 @@
 <html lang="zh-CN">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>FriendCircle-My status</title>
+  <title>FriendCircle-My homepage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -32,8 +32,8 @@
         <div class="nav-collapse collapse">
 
           <ul class="nav">
-            <li><a href="user-home.jsp">我的首页</a></li>
-            <li class="active"><a href="user-status.jsp">我的状态</a></li>
+            <li class="active"><a href="user-home.jsp">我的首页</a></li>
+            <li><a href="user-status.jsp">我的状态</a></li>
             <li><a href="user-friends.jsp">我的好友</a></li>
             <li><a href="user-info.jsp">个人信息</a></li>
           </ul>

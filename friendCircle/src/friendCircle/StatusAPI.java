@@ -54,7 +54,10 @@ public class StatusAPI extends SQLmanager {
 	public ArrayList<HashMap<String,String>> getStatusByUserID(String userID) throws Exception {
 		startMySQL();
 		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String, String>>();
-		String sql = "SELECT * FROM `friendCircle`.`status` WHERE `userID`='"+userID+"' ORDER BY date DESC, time DESC LIMIT 50";
+		String sql = 
+			"SELECT * FROM `friendCircle`.`status` "+
+			"WHERE `userID`='"+userID+"' "+
+			"ORDER BY date DESC, time DESC LIMIT 50";
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			HashMap<String, String> aStatus = new HashMap<String, String>();
