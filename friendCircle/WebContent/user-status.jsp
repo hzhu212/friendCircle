@@ -64,26 +64,30 @@
       
       <%
           String userID = "1";
-          String[][] allStatus = StatusAPI.getStatusByUserID(userID);
-          for(int i=0; i<allStatus.length; i++){
-            String statusID = allStatus[i][0];
-            String userIDTemp = allStatus[i][1];
-            String content = allStatus[i][2];
-            String time = allStatus[i][3];
-            String userName = UserAPI.getUserNameByID(userIDTemp);
+          String userName = userID;
+      	  StatusAPI statusAPI = new StatusAPI();
+      	  UserAPI userAPI = new UserAPI();
+      	  CommentAPI commentAPI = new CommentAPI();
+          String[][] statusList = statusAPI.getStatusByUserID(userID);
+          for(int i=0; i<statusList.length; i++){
+            String statusID = statusList[i][0];
+/*             String userIDTemp = statusList[i][1]; */
+            String content = statusList[i][2];
+            String time = statusList[i][3];
+/*             String userName = userAPI.getUserNameByID(userIDTemp); */
             if(statusID==null) break;
 
             out.println(
             "<div class=\"media\"> "+
             "<a class=\"pull-left\" href=\"#\"> "+
-            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userIDTemp+".png\" style=\"width: 64px; height: 64px;\"> "+
+            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userID+".png\" style=\"width: 64px; height: 64px;\"> "+
             "  </a> "+
             "  <div class=\"media-body\"> "+
             "  <a class=\"media-heading lead\" href=\"#\">"+userName+"</a> "+
             "    <p>"+content+"</p> "+
             "    <p class=\"muted\"><em>"+time+"</em></p> ");
 
-            String[][] allComments = CommentAPI.getCommentsByStatusID(statusID);
+            String[][] allComments = commentAPI.getCommentsByStatusID(statusID);
             boolean isEmpty = (allComments[0][1]==null);
             if(!isEmpty){
             	out.println("<div class=\"well well-small\"> ");

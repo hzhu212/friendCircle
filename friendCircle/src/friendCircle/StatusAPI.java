@@ -1,6 +1,6 @@
 package friendCircle;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class StatusAPI extends SQLmanager {
 	private String produceID() throws Exception {	//自动生成状态ID
@@ -45,16 +45,25 @@ public class StatusAPI extends SQLmanager {
 		String sql = "DELETE FROM `friendCircle`.`status` WHERE statusID='"+id+"'";
 		stmt.executeQuery(sql);
 	}
-	public String[][] getStatusByUserID(String userID) throws Exception {	//返回某个用户最近的所有状态
+	/**
+	 * 返回某个用户最近的所有状态
+	 * @param userID
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<HashMap<String,String>> getStatusByUserID(String userID) throws Exception {
 		startMySQL();
-		String[][] result = new String[20][2];
+		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String, String>>();
 		String sql = "SELECT content,date,time FROM `friendCircle`.`status` WHERE `userID`='"+userID+"' ORDER BY date DESC, time DESC LIMIT 20";
 		rs = stmt.executeQuery(sql);
-		int count = 0;
 		while (rs.next()) {
-			result[count][0] = rs.getString("content");
-			result[count][1] = rs.getString("date") + " " + rs.getString("time");
-			count++;
+			HashMap<String, String> aStatus = new HashMap<String, String>();
+			aStatus.put("statusID", rs.getString("statusID"));
+			aStatus.put("userID", rs.getString("userID"));
+			aStatus.put("date", rs.getString("date"));
+			aStatus.put("time", rs.getString("time"));
+			aStatus.put("content", rs.getString("content"));
+			result.add(aStatus);
 		}
 		return result;
 	}
