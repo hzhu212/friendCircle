@@ -1,6 +1,7 @@
 package friendCircle;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StatusAPI extends SQLmanager {
 	private String produceID() throws Exception {	//自动生成状态ID
@@ -43,21 +44,14 @@ public class StatusAPI extends SQLmanager {
 	public void delStatus(String id) throws Exception {	//删除状态
 		startMySQL();
 		String sql = "DELETE FROM `friendCircle`.`status` WHERE statusID='"+id+"'";
-		stmt.executeQuery(sql);
-	}
-	/**
-	 * 返回某个用户最近的所有状态（最多50条）
-	 * @param userID
-	 * @return
-	 * @throws Exception
-	 */
-	public ArrayList<HashMap<String,String>> getStatusByUserID(String userID) throws Exception {
+		stmt.execute(sql);
+	}	
+	public ArrayList<HashMap<String,String>> getStatusByUserID(String userID) throws Exception {	//返回某个用户最近的所有状态
 		startMySQL();
 		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String, String>>();
-		String sql = 
-			"SELECT * FROM `friendCircle`.`status` "+
-			"WHERE `userID`='"+userID+"' "+
-			"ORDER BY date DESC, time DESC LIMIT 50";
+		String sql = "SELECT * FROM `friendCircle`.`status` "+
+				"WHERE `userID`='"+userID+"' "+
+						"ORDER BY date DESC, time DESC LIMIT 50";
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			HashMap<String, String> aStatus = new HashMap<String, String>();
@@ -70,21 +64,14 @@ public class StatusAPI extends SQLmanager {
 		}
 		return result;
 	}
-	/**
-	 * 返回用户所有好友的最新动态
-	 * @param userID
-	 * @return
-	 * @throws Exception
-	 */
-	public ArrayList<HashMap<String,String>> getFriendsStatus(String userID) throws Exception {
+	public ArrayList<HashMap<String,String>> getFriendsStatus(String userID) throws Exception {	//返回用户所有好友的最新动态
 		startMySQL();
 		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String, String>>();
-		String sql = 
-			"SELECT * FROM `friendCircle`.`status` "+
-			"WHERE `userID` in ( "+
-				"SELECT userID2 FROM `friendCircle`.`friend`"+
-				"WHERE userID1='"+userID+"' ) "+
-			"ORDER BY date DESC, time DESC LIMIT 50";
+		String sql = "SELECT * FROM `friendCircle`.`status` "+
+				"WHERE `userID` IN ( "+
+						"SELECT userID2 FROM `friendCircle`.`friend`"+
+								"WHERE userID1='"+userID+"' ) "+
+										"ORDER BY date DESC, time DESC LIMIT 50";
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			HashMap<String, String> aStatus = new HashMap<String, String>();

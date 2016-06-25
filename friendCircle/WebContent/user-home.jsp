@@ -61,16 +61,26 @@
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">
       <div class="span7 offset2">
+
+      <textarea class="" rows="3"></textarea>
+      <button class="btn" type="button">确认</button> 
       
       <%
       	  StatusAPI statusAPI = new StatusAPI();
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
       	  
-      	  String hostUserID = "1";
-          String hostUserName = userAPI.getUserNameByID(hostUserID);
+     	  String hostUserID = "1";
+          String hostUserName = "user1"; 
+/*           String hostUserName = session.getAttribute("loginUser").toString();
+       	  String[] hostInfo=userAPI.getUser(hostUserName);
+          String hostUserID = hostInfo[0]; */
+
       	  
           ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(hostUserID);
+          if(statusList.isEmpty()){
+        	  out.println("没有动态");
+          }
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
             String userID = aStatus.get("userID");
@@ -81,7 +91,7 @@
             out.println(
             "<div class=\"media\"> "+
             "<a class=\"pull-left\" href=\"#\"> "+
-            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userID+".png\" style=\"width: 64px; height: 64px;\"> "+
+            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+1+".png\" style=\"width: 64px; height: 64px;\"> "+
             "  </a> "+
             "  <div class=\"media-body\"> "+
             "  <a class=\"media-heading lead\" href=\"#\">"+userName+"</a> "+

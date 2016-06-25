@@ -1,7 +1,6 @@
 package friendCircle;
 
 import java.util.ArrayList;
-import util.Util;
 
 public class UserAPI extends SQLmanager {
 	private String produceID() throws Exception {	//自动生成用户ID
@@ -38,19 +37,23 @@ public class UserAPI extends SQLmanager {
 		if (rs.next())
 			if (rs.getString("password").equals(password))
 				result = true;
-		
 		return result;
 	}
 	public String addUser(String[] info) throws Exception {	//添加用户信息，返回自动生成的用户ID
 		startMySQL();
 		if (info.length == 9) {
-			String sql1 = "DELETE FROM `friendCircle`.`user` WHERE userID='"+info[0]+"'";
+			String sql1 = "UPDATE `friendCircle`.`user` SET email='"+info[3]+"' WHERE userID='"+info[0]+"'";
 			stmt.execute(sql1);
-			String sql2 = "INSERT INTO `friendCircle`.`user` VALUES "
-					+ "('"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"','"+info[4]+"',"
-							+ "'"+info[5]+"','"+info[6]+"','"+info[7]+"','"+info[8]+"')";
+			String sql2 = "UPDATE `friendCircle`.`user` SET signature='"+info[4]+"' WHERE userID='"+info[0]+"'";
 			stmt.execute(sql2);
-			//
+			String sql3 = "UPDATE `friendCircle`.`user` SET displayPhoto='"+info[5]+"' WHERE userID='"+info[0]+"'";
+			stmt.execute(sql3);
+			String sql4 = "UPDATE `friendCircle`.`user` SET sex='"+info[6]+"' WHERE userID='"+info[0]+"'";
+			stmt.execute(sql4);
+			String sql5 = "UPDATE `friendCircle`.`user` SET birthday='"+info[7]+"' WHERE userID='"+info[0]+"'";
+			stmt.execute(sql5);
+			String sql6 = "UPDATE `friendCircle`.`user` SET city='"+info[8]+"' WHERE userID='"+info[0]+"'";
+			stmt.execute(sql6);
 			return info[0];
 		}
 		else {
@@ -80,38 +83,13 @@ public class UserAPI extends SQLmanager {
 		}
 		return info;
 	}
-	/**
-	 * 通过userID获得userName
-	 * @param userID
-	 * @return
-	 * @throws Exception 
-	 */
-	public String getUserNameByID(String userID) throws Exception{
+	public String getUserNameByID(String id) throws Exception {	//通过ID返回用户名
 		startMySQL();
-		String result = null;
-		String sql = "SELECT userName FROM `friendCircle`.`user` WHERE userID='" + userID +"' ";
-		rs = stmt.executeQuery(sql);
-		if(rs.next()){
-			result = rs.getString("userName");
-		}
-		return result;
-	}
-	public String[] getUserFromId(String id) throws Exception {	//返回用户信息
-		startMySQL();
-		String[] info = new String[9];
+		String name = null;
 		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userID='"+id+"'";
 		rs = stmt.executeQuery(sql);
-		if (rs.next()) {
-			info[0] = rs.getString("userID");
-			info[1] = rs.getString("userName");
-			info[2] = rs.getString("password");
-			info[3] = rs.getString("email");
-			info[4] = rs.getString("signature");
-			info[5] = rs.getString("displayPhoto");
-			info[6] = rs.getString("sex");
-			info[7] = rs.getString("birthday");
-			info[8] = rs.getString("city");
-		}
-		return info;
+		if (rs.next())
+			name = rs.getString("userName");
+		return name;
 	}
 }

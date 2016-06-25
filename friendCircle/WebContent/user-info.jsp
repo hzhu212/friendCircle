@@ -33,40 +33,44 @@
 
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
+    <div class="navbar-inner">
+      <div class="container">
 
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="home.jsp">FriendCircle</a>
-				<div class="nav-collapse collapse">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
 
-					<ul class="nav">
-						<li><a href="user-home.jsp">我的首页</a></li>
-						<li><a href="user-status.jsp">我的状态</a></li>
-						<li><a href="user-friends.jsp">我的好友</a></li>
-						<li class="active"><a href="user-info.jsp">个人信息</a></li>
-						<li><a href="user-group.jsp">用户群组</a></li>
-					</ul>
+        <a class="brand" href="home.jsp">FriendCircle</a>
+        <div class="nav-collapse collapse">
 
-					<form class="navbar-search pull-left">
-						<input type="text" class="search-query" placeholder="搜索好友">
-					</form>
+          <ul class="nav">
+            <li><a href="user-home.jsp">我的首页</a></li>
+            <li><a href="user-status.jsp">我的状态</a></li>
+            <li><a href="user-friends.jsp">我的好友</a></li>
+            <li class="active"><a href="user-info.jsp">个人信息</a></li>
+          </ul>
 
-					<ul class="nav pull-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">用户名 <b class="caret"></b>
-						</a>
-							<ul class="dropdown-menu role=" menu" aria-labelledby="dLabel">
-								<li><a href="home.jsp">退出</a></li>
-							</ul></li>
-					</ul>
+          <form class="navbar-search pull-left">
+            <input type="text" class="search-query" placeholder="搜索好友">
+          </form>
+          
+          <ul class="nav pull-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户名
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu role="menu" aria-labelledby="dLabel"">
+                <li><a href="#">退出</a></li>
+              </ul>
+            </li>
+          </ul>
 
-				</div>
-			</div>
-		</div>
-	</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 	<div class="container container-narrow" style="margin-top:100px;">
   	<div class="row">
@@ -116,6 +120,7 @@
 						</div>
 					</div>
 	      </div>
+	      
 	    </div>
 	  </div>
 	</div>

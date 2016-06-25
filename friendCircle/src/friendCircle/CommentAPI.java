@@ -1,6 +1,7 @@
 package friendCircle;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CommentAPI extends SQLmanager {
 	private String produceID() throws Exception {	//自动生成评论ID
@@ -22,22 +23,23 @@ public class CommentAPI extends SQLmanager {
 		startMySQL();
 		String id = produceID();
 		String sql = "INSERT INTO `friendCircle`.`comment` VALUES "
-				+ "('"+id+"','"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"','"+info[4]+"')";
+				+ "('"+id+"','"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"','"+info[4]+"','"+info[5]+"')";
 		stmt.execute(sql);
 		return id;
 	}
 	public String[] getComment(String id) throws Exception {	//返回评论信息
 		startMySQL();
-		String[] info = new String[6];
+		String[] info = new String[7];
 		String sql = "SELECT * FROM `friendCircle`.`comment` WHERE commentID='"+id+"'";
 		rs = stmt.executeQuery(sql);
 		if (rs.next()) {
 			info[0] = rs.getString("commentID");
 			info[1] = rs.getString("userID");
-			info[2] = rs.getString("statusID");
-			info[3] = rs.getString("date");
-			info[4] = rs.getString("time");
-			info[5] = rs.getString("content");
+			info[2] = rs.getString("targetUserID");
+			info[3] = rs.getString("statusID");
+			info[4] = rs.getString("date");
+			info[5] = rs.getString("time");
+			info[6] = rs.getString("content");
 		}
 		return info;
 	}
@@ -46,21 +48,14 @@ public class CommentAPI extends SQLmanager {
 		String sql = "DELETE FROM `friendCircle`.`comment` WHERE commentID='"+id+"'";
 		stmt.execute(sql);
 	}
-	/**
-	 * 根据状态ID获取所有评论（最多100条）
-	 * @param statusID
-	 * @return
-	 * @throws Exception
-	 */
-	public ArrayList<HashMap<String,String>> getCommentsByStatusID(String statusID) throws Exception {
+	public ArrayList<HashMap<String,String>> getCommentsByStatusID(String statusID) throws Exception {	//获得指定状态的所有评论
 		startMySQL();
 		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
-		String sql = 
-			"SELECT t.commentID, u1.userName as `fromUserName`, u2.userName as `toUserName`, t.content, t.date, t.time "+
-			"FROM friendCircle.user as u1, friendCircle.user as u2, (SELECT commentID,userID,targetUserID,content,date,time "+
-			"FROM friendCircle.comment WHERE statusID='"+statusID+"') as t "+
-			"WHERE u1.userID=t.userID AND u2.userID=t.targetUserID "+
-			"order by t.date, t.time limit 100 ";
+		String sql = "SELECT t.commentID, u1.userName AS `fromUserName`, u2.userName AS `toUserName`, t.content, t.date, t.time "+
+				"FROM friendCircle.user AS u1, friendCircle.user AS u2, (SELECT commentID,userID,targetUserID,content,date,time "+
+						"FROM friendCircle.comment WHERE statusID='"+statusID+"') AS t "+
+								"WHERE u1.userID=t.userID AND u2.userID=t.targetUserID "+
+										"ORDER BY t.date, t.time LIMIT 100 ";
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			HashMap<String, String> aComment = new HashMap<String, String>();

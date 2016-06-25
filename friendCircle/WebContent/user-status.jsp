@@ -67,11 +67,15 @@
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
       	  
-      	  String hostUserID = "1";
-          String hostUserName = userAPI.getUserNameByID(hostUserID);
-          /* String hostUserName = session.getAttribute("loginUser").toString(); */
-      	  
+/*       	  String hostUserID = "1"; */
+/*           String hostUserName = userAPI.getUserNameByID(hostUserID); */
+          String hostUserName = session.getAttribute("loginUser").toString();
+		  String hostUserID = userAPI.getUser(hostUserName)[0];
+		  
           ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(hostUserID);
+          if(statusList.isEmpty()){
+        	  out.println("没有动态");
+          }
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
             String userID = aStatus.get("userID");
