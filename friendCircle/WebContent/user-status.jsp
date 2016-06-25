@@ -63,14 +63,15 @@
       <div class="span7 offset2">
       
       <%
-          String userID = "1";
-          String userName = userID;
+          String hostUserID = "1";
+          String hostUserName = hostUserID;
       	  StatusAPI statusAPI = new StatusAPI();
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
-          ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(userID);
+          ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(hostUserID);
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
+            String userName = userAPI.getUserNameByID(aStatus.get("userID"));
             String content = aStatus.get("content");
             String time = aStatus.get("date") + " " + aStatus.get("time");
 
@@ -119,21 +120,6 @@
             );
           }
         %>
-
-<div>
-<table>
-	<%
-   Enumeration headerNames = request.getHeaderNames();
-   while(headerNames.hasMoreElements()) {
-      String paramName = (String)headerNames.nextElement();
-      out.print("<tr><td>" + paramName + "</td>\n");
-      String paramValue = request.getHeader(paramName);
-      out.println("<td> " + paramValue + "</td></tr>\n");
-   }
-%>
-</table>
-</div>
-
 
       </div>
     </div>

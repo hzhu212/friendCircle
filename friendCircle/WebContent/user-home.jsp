@@ -64,11 +64,11 @@
       
       <%
           String userID = "1";
-          String userName = userID;
+          String hostUserName = userID;
       	  StatusAPI statusAPI = new StatusAPI();
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
-          ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(userID);
+          ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(userID);
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
             String content = aStatus.get("content");
@@ -119,21 +119,6 @@
             );
           }
         %>
-
-<div>
-<table>
-	<%
-   Enumeration headerNames = request.getHeaderNames();
-   while(headerNames.hasMoreElements()) {
-      String paramName = (String)headerNames.nextElement();
-      out.print("<tr><td>" + paramName + "</td>\n");
-      String paramValue = request.getHeader(paramName);
-      out.println("<td> " + paramValue + "</td></tr>\n");
-   }
-%>
-</table>
-</div>
-
 
       </div>
     </div>

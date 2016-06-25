@@ -80,4 +80,20 @@ public class UserAPI extends SQLmanager {
 		}
 		return info;
 	}
+	/**
+	 * 通过userID获得userName
+	 * @param userID
+	 * @return
+	 * @throws Exception 
+	 */
+	public String getUserNameByID(String userID) throws Exception{
+		startMySQL();
+		String result = null;
+		String sql = "SELECT userName FROM `friendCircle`.`user` WHERE userID='" + userID +"' ";
+		rs = stmt.executeQuery(sql);
+		if(rs.next()){
+			result = rs.getString("userName");
+		}
+		return result;
+	}
 }

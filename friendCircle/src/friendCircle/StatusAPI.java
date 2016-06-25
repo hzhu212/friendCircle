@@ -70,4 +70,31 @@ public class StatusAPI extends SQLmanager {
 		}
 		return result;
 	}
+	/**
+	 * 返回用户所有好友的最新动态
+	 * @param userID
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<HashMap<String,String>> getFriendsStatus(String userID) throws Exception {
+		startMySQL();
+		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String, String>>();
+		String sql = 
+			"SELECT * FROM `friendCircle`.`status` "+
+			"WHERE `userID` in ( "+
+				"SELECT userID2 FROM `friendCircle`.`friend`"+
+				"WHERE userID1='"+userID+"' ) "+
+			"ORDER BY date DESC, time DESC LIMIT 50";
+		rs = stmt.executeQuery(sql);
+		while (rs.next()) {
+			HashMap<String, String> aStatus = new HashMap<String, String>();
+			aStatus.put("statusID", rs.getString("statusID"));
+			aStatus.put("userID", rs.getString("userID"));
+			aStatus.put("date", rs.getString("date"));
+			aStatus.put("time", rs.getString("time"));
+			aStatus.put("content", rs.getString("content"));
+			result.add(aStatus);
+		}
+		return result;
+	}
 }
