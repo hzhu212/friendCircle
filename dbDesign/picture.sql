@@ -12,5 +12,3 @@ create table `picture`(
 insert into `picture` values(1, "/image/picture/test1.jpg");
 insert into `picture` values(1, "/image/picture/test2.jpg");
 insert into `picture` values(2, "/image/picture/test3.jpg");
-
-

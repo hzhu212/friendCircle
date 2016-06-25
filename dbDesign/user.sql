@@ -9,7 +9,7 @@ CREATE TABLE `user` (
 	`password` char(33) NOT NULL,
 	`email` varchar(255) NOT NULL,
 	`signature` varchar(255) NOT NULL DEFAULT '',
-	`displayPhoto` varchar(255) NOT NULL DEFAULT '/image/displayPhoto/sample.png',
+	`displayPhoto` varchar(255) NOT NULL DEFAULT '/image/display-photo/sample.png',
 	`sex` enum('男','女') NOT NULL DEFAULT '男',
 	`birthday` date NOT NULL DEFAULT '1000-01-01',
 	`city` varchar(255) NOT NULL DEFAULT '',
