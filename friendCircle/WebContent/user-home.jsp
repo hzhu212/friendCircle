@@ -35,6 +35,19 @@
 </head>
 
 <body>
+
+  <%
+  //每30秒刷新一次页面
+  response.setIntHeader("refresh", 60);
+
+  StatusAPI statusAPI = new StatusAPI();
+  UserAPI userAPI = new UserAPI();
+  CommentAPI commentAPI = new CommentAPI();
+
+  String hostUserName = session.getAttribute("loginUser").toString();
+  String hostUserID = session.getAttribute("loginUserID").toString();
+  %>
+
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -53,6 +66,7 @@
             <li><a href="user-status.jsp">我的状态</a></li>
             <li><a href="user-friends.jsp">我的好友</a></li>
             <li><a href="user-info.jsp">个人信息</a></li>
+            <li ><a href="user-group.jsp">群组</a></li>
           </ul>
 
           <form class="navbar-search pull-left">
@@ -61,11 +75,11 @@
           
           <ul class="nav pull-right">
             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">用户名
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= hostUserName %>
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu role="menu" aria-labelledby="dLabel"">
-                <li><a href="#">退出</a></li>
+                <li><a href="doLogOff.jsp">退出</a></li>
               </ul>
             </li>
           </ul>
@@ -74,15 +88,6 @@
       </div>
     </div>
   </div>
-
-  <%
-    StatusAPI statusAPI = new StatusAPI();
-    UserAPI userAPI = new UserAPI();
-    CommentAPI commentAPI = new CommentAPI();
-
-    String hostUserName = session.getAttribute("loginUser").toString();
-    String hostUserID = session.getAttribute("loginUserID").toString();
-  %>
 
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">

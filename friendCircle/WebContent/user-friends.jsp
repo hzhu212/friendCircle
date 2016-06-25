@@ -27,6 +27,15 @@
 </head>
 
 <body>
+
+	<%
+	String hostUserName=session.getAttribute("loginUser").toString();
+	UserAPI userApi=new UserAPI();
+	String[] userInfo=userApi.getUser(hostUserName);
+	FriendAPI friendApi=new FriendAPI();
+	ArrayList<String> userFriends=friendApi.getFriend(userInfo[0]);
+	%>
+
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -49,12 +58,14 @@
 					</form>
 
 					<ul class="nav pull-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">用户名 <b class="caret"></b>
-						</a>
-							<ul class="dropdown-menu role=" menu" aria-labelledby="dLabel">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= hostUserName %>
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu role=" aria-labelledby="dLabel">
 								<li><a href="home.jsp">退出</a></li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 
 				</div>
@@ -63,43 +74,37 @@
 	</div>
 
 	<div class="container container-narrow" style="margin-top:100px;">
-  	<div class="row">
-  		<div class="span7 offset2">
+		<div class="row">
+			<div class="span7 offset2">
 				<%
-					String userName=session.getAttribute("loginUser").toString();
-					UserAPI userApi=new UserAPI();
-					String[] userInfo=userApi.getUser(userName);
-					FriendAPI friendApi=new FriendAPI();
-					ArrayList<String> userFriends=friendApi.getFriend(userInfo[0]);
-					//如果没有好友
-					if(userFriends.size()==0){
-						out.print("<div id=\"friends\">"+"<p class=\"lead\">您尚未添加好友</p class=\"lead\">"+"</div>");
-					}
-					else{
-						out.print("<div id=\"friends\">"+"<p class=\"lead\">您的好友信息为：</p class=\"lead\">"+"</div>");
-					}
-					//有好友
-					for(int i=0;i<userFriends.size();i++){
-						String[] temp=userApi.getUser(userApi.getUserNameByID(userFriends.get(i)));
-						out.print(
-						"<div id=\"friends\">" +
-							"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"无法加载\"" +
-							"src=\""+temp[5]+"\"" +
-							"<br>好友名："+temp[1]+"<br>" +
-							"个性签名："+temp[4]+"<br>" +
-						"</div>");
-					}
-					//好友推荐
-					ArrayList<ArrayList<String>> suggestion=friendApi.getSuggestion(userInfo[0]);
-					out.print("<div id=\"suggest\">"+"<h2>好友推荐信息：</h2>"+"</div>");
-					for(ArrayList<String> sug:suggestion){
-						if(sug==null)
-							continue;
-						out.print("<div id=\"suggest\">"
-								+"<br>推荐好友："+sug.get(2)+"<br>"
-								+"关系路径："+"你——"+sug.get(1)+"——"+sug.get(2)+"<br></div>");
-					}
-					
+				//如果没有好友
+				if(userFriends.size()==0){
+					out.print("<div id=\"friends\">"+"<p class=\"lead\">您尚未添加好友</p class=\"lead\">"+"</div>");
+				}
+				else{
+					out.print("<div id=\"friends\">"+"<p class=\"lead\">您的好友信息为：</p class=\"lead\">"+"</div>");
+				}
+				//有好友
+				for(int i=0;i<userFriends.size();i++){
+					String[] temp=userApi.getUser(userApi.getUserNameByID(userFriends.get(i)));
+					out.print(
+					"<div id=\"friends\">" +
+						"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"无法加载\"" +
+						"src=\""+temp[5]+"\"" +
+						"<br>好友名："+temp[1]+"<br>" +
+						"个性签名："+temp[4]+"<br>" +
+					"</div>");
+				}
+				//好友推荐
+				ArrayList<ArrayList<String>> suggestion=friendApi.getSuggestion(userInfo[0]);
+				out.print("<div id=\"suggest\">"+"<h2>好友推荐信息：</h2>"+"</div>");
+				for(ArrayList<String> sug:suggestion){
+					if(sug==null)
+						continue;
+					out.print("<div id=\"suggest\">"
+							+"<br>推荐好友："+sug.get(2)+"<br>"
+							+"关系路径："+"你——"+sug.get(1)+"——"+sug.get(2)+"<br></div>");
+				}
 				%>
 			</div>
 		</div>

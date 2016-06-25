@@ -16,15 +16,22 @@
 <!-- Le styles -->
 <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-<!-- used for model window -->
-<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src="/scripts/jquery.min.js"></script>
-<script src="/bootstrap/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+	body{
+		background-image: url("./bootstrap/img/background/2.jpg");
+		background-size: cover;
+	}
+</style>
 </head>
 
-<body background=".\bootstrap\img\background\2.jpg">
+<body>
+
+	<%
+	GroupAPI groupApi = new GroupAPI();
+	String hostUserName = session.getAttribute("loginUser").toString();
+	ArrayList<String> groupInfo = groupApi.getGroup(hostUserName);
+	%>
+
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -40,7 +47,7 @@
 						<li><a href="user-status.jsp">我的状态</a></li>
 						<li><a href="user-friends.jsp">我的好友</a></li>
 						<li><a href="user-info.jsp">个人信息</a></li>
-						<li class="active"><a href="user-group.jsp">用户群组</a></li>
+						<li class="active"><a href="user-group.jsp">群组</a></li>
 					</ul>
 
 					<form class="navbar-search pull-left">
@@ -48,12 +55,14 @@
 					</form>
 
 					<ul class="nav pull-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#">用户名 <b class="caret"></b>
-						</a>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= hostUserName %>
+								<b class="caret"></b>
+							</a>
 							<ul class="dropdown-menu role=" aria-labelledby="dLabel">
 								<li><a href="home.jsp">退出</a></li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 
 				</div>
@@ -63,14 +72,8 @@
 	<div class="container container-narrow" style="margin-top:50px;">
     	<div class="row">
       		<div class="span7 offset2">
-    
-				<div id="in" class="row"  style="background:  #87CEFA  ;width:70%; margin:0 auto;height:400px;">
-					
-				
-				<%
-					GroupAPI groupApi=new GroupAPI();
-					String userName=session.getAttribute("loginUser").toString();
-					ArrayList<String> groupInfo=groupApi.getGroup(userName);
+				<div id="in" class="row">
+					<%
 					out.print("<h4>当前加入的群组：</h4>");
 					if(groupInfo.size()==0)
 						out.print("当前尚未加入任何群组");
@@ -78,7 +81,7 @@
 						out.print(groupApi.getGroupName(temp)+"br");
 					}
 					out.print("<hr>");
-				%>
+					%>
 					<h4>搜索群组：</h4>
 					<form class="navbar-search pull-left" action="dogroup_search.jsp">
 						<input type="text" class="search-query" name="input" placeholder="搜索用户组">

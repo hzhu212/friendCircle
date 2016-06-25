@@ -10,7 +10,8 @@
 	if(dologin.judgeLegal(userName,passWord)){
 		session.setAttribute("loginUser", userName);
 		session.setAttribute("loginUserID", dologin.getUserIDByName(userName));
-	    request.getRequestDispatcher("user-home.jsp").forward(request, response);
+		response.sendRedirect("user-home.jsp");
+	    //request.getRequestDispatcher("user-home.jsp").forward(request, response);
 	}
 	else{
 		response.sendRedirect("login_failure.jsp");
