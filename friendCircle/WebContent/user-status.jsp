@@ -68,14 +68,11 @@
       	  StatusAPI statusAPI = new StatusAPI();
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
-          String[][] statusList = statusAPI.getStatusByUserID(userID);
-          for(int i=0; i<statusList.length; i++){
-            String statusID = statusList[i][0];
-/*             String userIDTemp = statusList[i][1]; */
-            String content = statusList[i][2];
-            String time = statusList[i][3];
-/*             String userName = userAPI.getUserNameByID(userIDTemp); */
-            if(statusID==null) break;
+          ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(userID);
+          for(HashMap<String,String> aStatus: statusList){
+            String statusID = aStatus.get("statusID");
+            String content = aStatus.get("content");
+            String time = aStatus.get("date") + " " + aStatus.get("time");
 
             out.println(
             "<div class=\"media\"> "+

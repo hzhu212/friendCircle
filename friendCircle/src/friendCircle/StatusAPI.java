@@ -46,7 +46,7 @@ public class StatusAPI extends SQLmanager {
 		stmt.executeQuery(sql);
 	}
 	/**
-	 * 返回某个用户最近的所有状态
+	 * 返回某个用户最近的所有状态（最多50条）
 	 * @param userID
 	 * @return
 	 * @throws Exception
@@ -54,7 +54,7 @@ public class StatusAPI extends SQLmanager {
 	public ArrayList<HashMap<String,String>> getStatusByUserID(String userID) throws Exception {
 		startMySQL();
 		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String, String>>();
-		String sql = "SELECT content,date,time FROM `friendCircle`.`status` WHERE `userID`='"+userID+"' ORDER BY date DESC, time DESC LIMIT 20";
+		String sql = "SELECT * FROM `friendCircle`.`status` WHERE `userID`='"+userID+"' ORDER BY date DESC, time DESC LIMIT 50";
 		rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			HashMap<String, String> aStatus = new HashMap<String, String>();

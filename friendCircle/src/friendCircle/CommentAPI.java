@@ -1,6 +1,6 @@
 package friendCircle;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class CommentAPI extends SQLmanager {
 	private String produceID() throws Exception {	//自动生成评论ID
@@ -46,16 +46,31 @@ public class CommentAPI extends SQLmanager {
 		String sql = "DELETE FROM `friendCircle`.`comment` WHERE commentID='"+id+"'";
 		stmt.execute(sql);
 	}
-	public String[][] getCommentsByStatusID(String statusID) throws Exception {	//获取指定状态的所有评论
+	/**
+	 * 根据状态ID获取所有评论（最多100条）
+	 * @param statusID
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<HashMap<String,String>> getCommentsByStatusID(String statusID) throws Exception {
 		startMySQL();
-		String[][] result = new String[100][3];
-		String sql = "SELECT c.userID,r.targetID,c.content FROM `friendCircle`.`comment` AS c, `friendCircle`.`reply` AS r WHERE c.`statusID`='"+statusID+"' AND c.commentID=r.commentID ORDER BY c.date,c.time LIMIT 100";
+		ArrayList<HashMap<String,String>> result = new ArrayList<HashMap<String,String>>();
+		String sql = 
+			"SELECT t.commentID, u1.userName as `fromUserName`, u2.userName as `toUserName`, t.content, t.date, t.time "+
+			"FROM friendCircle.user as u1, friendCircle.user as u2, (SELECT commentID,userID,targetUserID,content,date,time "+
+			"FROM friendCircle.comment WHERE statusID='"+statusID+"') as t "+
+			"WHERE u1.userID=t.userID AND u2.userID=t.targetUserID "+
+			"order by t.date, t.time limit 100 ";
 		rs = stmt.executeQuery(sql);
-		int count = 0;
 		while (rs.next()) {
-			result[count][0] = rs.getString("content");
-			result[count][1] = rs.getString("date") + " " + rs.getString("time");
-			count++;
+			HashMap<String, String> aComment = new HashMap<String, String>();
+			aComment.put("commentID", rs.getString("commentID"));
+			aComment.put("fromUserName", rs.getString("fromUserName"));
+			aComment.put("toUserName", rs.getString("toUserName"));
+			aComment.put("date", rs.getString("date"));
+			aComment.put("time", rs.getString("time"));
+			aComment.put("content", rs.getString("content"));
+			result.add(aComment);
 		}
 		return result;
 	}
