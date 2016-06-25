@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -54,18 +53,19 @@ body {
 </head>
 
 <body>
-
 	<div class="container">
 
 		<form class="form-login" action="dologin.jsp" method="post">
 			<h2 class="form-login-heading">登录</h2>
-			<input type="text" class="input-block-level" name="username"
-				placeholder="请输入用户名"> <input type="password"
-				class="input-block-level" name="password" placeholder="请输入密码">
-			<label class="checkbox"> <input type="checkbox"
-				value="remember-username"> 记住用户名
-			</label> <label class="checkbox"> <input type="checkbox"
-				value="remember-password"> 记住密码
+			<input type="text" class="input-block-level" name="username" placeholder="请输入用户名">
+			<input type="password" class="input-block-level" name="password" placeholder="请输入密码">
+			<label class="checkbox">
+				<input type="checkbox" value="remember-username">
+				记住用户名
+			</label>
+			<label class="checkbox">
+				<input type="checkbox" value="remember-password">
+				记住密码
 			</label>
 			<button class="btn btn-large btn-primary" type="submit">登录</button>
 			<a href="home.jsp" class="btn-large pull-right">返回首页</a>

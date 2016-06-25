@@ -15,6 +15,16 @@
   <!-- Le styles -->
   <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  <style type="text/css">
+    body{
+      background-color: ivory;
+    }
+    .form-actions{
+      background-color: rgba(240, 128, 128, 0.1);
+      border-radius: 5px;
+      border: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -63,11 +73,8 @@
     UserAPI userAPI = new UserAPI();
     CommentAPI commentAPI = new CommentAPI();
 
-/*  String hostUserID = "1";
-    String hostUserName = "user1";  */
     String hostUserName = session.getAttribute("loginUser").toString();
-    String[] hostInfo=userAPI.getUser(hostUserName);
-    String hostUserID = hostInfo[0];
+    String hostUserID = session.getAttribute("loginUserID").toString();
   %>
 
   <div class="container container-narrow" style="margin-top:100px;">
@@ -81,11 +88,11 @@
         <div class="media-body">
           <a class="media-heading lead" href="#"><%= hostUserName %></a>
           <p class="lead text-warning">发布动态</p>
-          <textarea class="span6 input-block-level" rows="3"></textarea>
-          <div class="form-actions">
+          <form class="form-actions" action="doReleaseStatus.jsp" method="post">
+            <textarea class="input-block-level" rows="5" name="content" placeholder="在这里写下你想说的话吧..."></textarea>
             <button type="submit" class="btn btn-primary">发布</button>
             <button type="button" class="btn">清空</button>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -93,7 +100,7 @@
       <%
           ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(hostUserID);
           if(statusList.isEmpty()){
-        	  out.println("没有动态");
+        	out.println("<p class=\"lead\">没有动态</p>");
           }
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
@@ -135,7 +142,7 @@
             }
             
             out.println(
-            "  <div class=\"input-append pull-right\"> "+
+            "  <div class=\"input-append\"> "+
             "    <input class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
             "    <button class=\"btn\" type=\"button\">确认</button> "+
             "  </div> "

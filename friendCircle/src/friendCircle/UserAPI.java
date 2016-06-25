@@ -83,13 +83,34 @@ public class UserAPI extends SQLmanager {
 		}
 		return info;
 	}
-	public String getUserNameByID(String id) throws Exception {	//通过ID返回用户名
+	/**
+	 * 通过ID得到用户名
+	 * @param userID
+	 * @return
+	 * @throws Exception
+	 */
+	public String getUserNameByID(String userID) throws Exception {
 		startMySQL();
-		String name = null;
-		String sql = "SELECT * FROM `friendCircle`.`user` WHERE userID='"+id+"'";
+		String userName = null;
+		String sql = "SELECT userName FROM `friendCircle`.`user` WHERE userID='"+userID+"'";
 		rs = stmt.executeQuery(sql);
 		if (rs.next())
-			name = rs.getString("userName");
-		return name;
+			userName = rs.getString("userName");
+		return userName;
+	}
+	/**
+	 * 通过用户名得到用户ID
+	 * @param userName
+	 * @return
+	 * @throws Exception
+	 */
+	public String getUserIDByName(String userName) throws Exception {
+		startMySQL();
+		String userID = null;
+		String sql = "SELECT userID FROM `friendCircle`.`user` WHERE userName='"+userName+"'";
+		rs = stmt.executeQuery(sql);
+		if (rs.next())
+			userID = rs.getString("userID");
+		return userID;
 	}
 }

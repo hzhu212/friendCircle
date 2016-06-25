@@ -15,6 +15,11 @@
   <!-- Le styles -->
   <link href="./bootstrap/css/bootstrap.css" rel="stylesheet">
   <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+  <style type="text/css">
+    body{
+      background-color: ivory;
+    }
+  </style>
 </head>
 
 <body>
@@ -58,23 +63,23 @@
     </div>
   </div>
 
+  <%
+    StatusAPI statusAPI = new StatusAPI();
+    UserAPI userAPI = new UserAPI();
+    CommentAPI commentAPI = new CommentAPI();
+
+    String hostUserName = session.getAttribute("loginUser").toString();
+    String hostUserID = session.getAttribute("loginUserID").toString();
+  %>
+
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">
       <div class="span7 offset2">
       
       <%
-      	  StatusAPI statusAPI = new StatusAPI();
-      	  UserAPI userAPI = new UserAPI();
-      	  CommentAPI commentAPI = new CommentAPI();
-      	  
-/*       	  String hostUserID = "1"; */
-/*           String hostUserName = userAPI.getUserNameByID(hostUserID); */
-          String hostUserName = session.getAttribute("loginUser").toString();
-		  String hostUserID = userAPI.getUser(hostUserName)[0];
-		  
           ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(hostUserID);
           if(statusList.isEmpty()){
-        	  out.println("没有动态");
+        	  out.println("<p class=\"lead\">没有动态</p>");
           }
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
@@ -116,7 +121,7 @@
             }
             
             out.println(
-            "  <div class=\"input-append pull-right\"> "+
+            "  <div class=\"input-append\"> "+
             "    <input class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
             "    <button class=\"btn\" type=\"button\">确认</button> "+
             "  </div> "
