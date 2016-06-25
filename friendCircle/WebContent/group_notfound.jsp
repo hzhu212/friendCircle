@@ -84,6 +84,8 @@
 						<input type="text" class="search-query" name="input" placeholder="搜索用户组">
 						<button class="btn btn-middle btn-primary" type="submit">搜索</button>
 					</form>
+					<br>
+					<h5>未能找到该群组，请检查搜索的群组ID</h5>
 				</div>
 			</div>
 		</div>

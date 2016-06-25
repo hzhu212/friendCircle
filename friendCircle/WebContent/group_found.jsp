@@ -65,24 +65,31 @@
       		<div class="span7 offset2">
     
 				<div id="in" class="row"  style="background:  #87CEFA  ;width:70%; margin:0 auto;height:400px;">
-					
+					<%
+						GroupAPI groupApi=new GroupAPI();
+						String userName=session.getAttribute("loginUser").toString();
+						ArrayList<String> groupInfo=groupApi.getGroup(userName);
+						out.print("<h4>当前加入的群组：</h4>");
+						if(groupInfo.size()==0)
+							out.print("当前尚未加入任何群组");
+						for(String temp:groupInfo){
+							out.print(groupApi.getGroupName(temp)+"br");
+						}
+						out.print("<hr>");
+					%>
 				
-				<%
-					GroupAPI groupApi=new GroupAPI();
-					String userName=session.getAttribute("loginUser").toString();
-					ArrayList<String> groupInfo=groupApi.getGroup(userName);
-					out.print("<h4>当前加入的群组：</h4>");
-					if(groupInfo.size()==0)
-						out.print("当前尚未加入任何群组");
-					for(String temp:groupInfo){
-						out.print(groupApi.getGroupName(temp)+"br");
-					}
-					out.print("<hr>");
-				%>
 					<h4>搜索群组：</h4>
 					<form class="navbar-search pull-left" action="dogroup_search.jsp">
 						<input type="text" class="search-query" name="input" placeholder="搜索用户组">
 						<button class="btn btn-middle btn-primary" type="submit">搜索</button>
+					</form>
+					<%
+						String groupId=session.getAttribute("groupFound").toString();
+						out.print("<h6>查找到的群为：</h6><br>");
+						out.print("群id："+groupId+"    群名："+groupApi.getGroupName(groupId));
+					%>
+					<form class="navbar-search pull-left" action="dogroup_enter.jsp">
+						<button class="btn btn-middle btn-primary" type="submit">加入该群</button>
 					</form>
 				</div>
 			</div>

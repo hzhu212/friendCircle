@@ -1,5 +1,4 @@
-<%@page language="java" import="friendCircle.*"
-	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" import="friendCircle.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.*"%>
 <%@page import="util.Util"%>
 <%@page import="friendCircle.*"%>
@@ -23,14 +22,15 @@
 <script src="/scripts/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <style type="text/css">
-	div#friends {background-color:#EEEEEE;height=200px;width:500px;float:left;}
-	div#suggest {background-color:#99bbbb;height=200px;width:500px;float:left}
-	h2 {margin-bottom:0;font-size:18px;}
+	body{
+		background-image: url("./bootstrap/img/background/3.jpg");
+		background-size: cover;
+	}
 </style>
 
 </head>
 
-<body background=".\bootstrap\img\background\3.jpg">
+<body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -65,7 +65,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="container container-narrow" style="margin-top:50px;">
+
+	<div class="container container-narrow" style="margin-top:100px;">
     	<div class="row">
       		<div class="span7 offset2">
 	<%
