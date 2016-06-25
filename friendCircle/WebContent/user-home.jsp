@@ -58,25 +58,39 @@
     </div>
   </div>
 
+  <%
+    StatusAPI statusAPI = new StatusAPI();
+    UserAPI userAPI = new UserAPI();
+    CommentAPI commentAPI = new CommentAPI();
+
+/*  String hostUserID = "1";
+    String hostUserName = "user1";  */
+    String hostUserName = session.getAttribute("loginUser").toString();
+    String[] hostInfo=userAPI.getUser(hostUserName);
+    String hostUserID = hostInfo[0];
+  %>
+
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">
       <div class="span7 offset2">
 
-      <textarea class="" rows="3"></textarea>
-      <button class="btn" type="button">确认</button> 
+      <div class="media">
+        <a class="pull-left" href="#">
+          <%="<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+hostUserID+".png\" style=\"width: 64px; height: 64px;\">"%>
+        </a>
+        <div class="media-body">
+          <a class="media-heading lead" href="#"><%= hostUserName %></a>
+          <p class="lead text-warning">发布动态</p>
+          <textarea class="span6 input-block-level" rows="3"></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">发布</button>
+            <button type="button" class="btn">清空</button>
+          </div>
+        </div>
+      </div>
+
       
       <%
-      	  StatusAPI statusAPI = new StatusAPI();
-      	  UserAPI userAPI = new UserAPI();
-      	  CommentAPI commentAPI = new CommentAPI();
-      	  
-/*      	  String hostUserID = "1";
-          String hostUserName = "user1";  */
-          String hostUserName = session.getAttribute("loginUser").toString();
-       	  String[] hostInfo=userAPI.getUser(hostUserName);
-          String hostUserID = hostInfo[0];
-
-      	  
           ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(hostUserID);
           if(statusList.isEmpty()){
         	  out.println("没有动态");
@@ -91,7 +105,7 @@
             out.println(
             "<div class=\"media\"> "+
             "<a class=\"pull-left\" href=\"#\"> "+
-            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+1+".png\" style=\"width: 64px; height: 64px;\"> "+
+            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userID+".png\" style=\"width: 64px; height: 64px;\"> "+
             "  </a> "+
             "  <div class=\"media-body\"> "+
             "  <a class=\"media-heading lead\" href=\"#\">"+userName+"</a> "+
