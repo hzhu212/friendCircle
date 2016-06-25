@@ -63,22 +63,26 @@
       <div class="span7 offset2">
       
       <%
-          String hostUserID = "1";
-          String hostUserName = hostUserID;
       	  StatusAPI statusAPI = new StatusAPI();
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
+      	  
+      	  String hostUserID = "1";
+          String hostUserName = userAPI.getUserNameByID(hostUserID);
+          /* String hostUserName = session.getAttribute("loginUser").toString(); */
+      	  
           ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(hostUserID);
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
-            String userName = userAPI.getUserNameByID(aStatus.get("userID"));
+            String userID = aStatus.get("userID");
+            String userName = userAPI.getUserNameByID(userID);
             String content = aStatus.get("content");
             String time = aStatus.get("date") + " " + aStatus.get("time");
 
             out.println(
             "<div class=\"media\"> "+
             "<a class=\"pull-left\" href=\"#\"> "+
-            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+userID+".png\" style=\"width: 64px; height: 64px;\"> "+
+            "  <img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+hostUserID+".png\" style=\"width: 64px; height: 64px;\"> "+
             "  </a> "+
             "  <div class=\"media-body\"> "+
             "  <a class=\"media-heading lead\" href=\"#\">"+userName+"</a> "+

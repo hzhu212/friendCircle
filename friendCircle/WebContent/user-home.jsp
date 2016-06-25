@@ -63,14 +63,18 @@
       <div class="span7 offset2">
       
       <%
-          String userID = "1";
-          String hostUserName = userID;
       	  StatusAPI statusAPI = new StatusAPI();
       	  UserAPI userAPI = new UserAPI();
       	  CommentAPI commentAPI = new CommentAPI();
-          ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(userID);
+      	  
+      	  String hostUserID = "1";
+          String hostUserName = userAPI.getUserNameByID(hostUserID);
+      	  
+          ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(hostUserID);
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");
+            String userID = aStatus.get("userID");
+            String userName = userAPI.getUserNameByID(userID);
             String content = aStatus.get("content");
             String time = aStatus.get("date") + " " + aStatus.get("time");
 
