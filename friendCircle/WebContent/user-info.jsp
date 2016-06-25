@@ -43,7 +43,7 @@
 				<div class="nav-collapse collapse">
 
 					<ul class="nav">
-						<li><a href="user-homepage.jsp">我的首页</a></li>
+						<li><a href="user-home.jsp">我的首页</a></li>
 						<li><a href="user-status.jsp">我的状态</a></li>
 						<li><a href="user-friends.jsp">我的好友</a></li>
 						<li class="active"><a href="user-info.jsp">个人信息</a></li>
