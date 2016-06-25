@@ -49,4 +49,41 @@ public class FriendAPI extends SQLmanager {
 		}
 		return result;
 	}
+	//查询是否是间临的好友（好友的好友），如果是，返回路径，否则返回null
+	public ArrayList<String> friendPath(String myID, String ID) throws Exception {	
+		ArrayList<String> friends = getFriend(myID);
+		ArrayList<String> result = new ArrayList<String>();
+		if (!friends.contains(ID))
+		{
+			for (String i : friends) {
+				if (getFriend(i).contains(ID)) {
+					UserAPI tempUser=new UserAPI(); 
+					result.add(tempUser.getUserFromId(myID)[1]);
+					result.add(tempUser.getUserFromId(i)[1]);
+					result.add(tempUser.getUserFromId(ID)[1]);
+					return result;
+				}
+			}
+		}
+		return null;
+	}
+	//获取一个user的所有间临好友
+	public ArrayList<ArrayList<String>> getSuggestion(String myID) throws Exception{
+		ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
+		ArrayList<String> friends=getFriend(myID);
+		ArrayList<String> hasChecked=new ArrayList<String>();
+		for(String fri:friends){
+			ArrayList<String> tempFriends=getFriend(fri);
+			for(String tmp:tempFriends){
+				if(hasChecked.contains(tmp)){
+					continue;
+				}
+				else{
+					result.add(this.friendPath(myID,tmp));
+					hasChecked.add(tmp);
+				}
+			}
+		}
+		return result;
+	}
 }
