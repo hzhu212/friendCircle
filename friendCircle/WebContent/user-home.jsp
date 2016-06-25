@@ -19,12 +19,19 @@
     body{
       background-color: ivory;
     }
-    form .form-actions{
+    form.form-actions{
       background-color: rgba(240, 128, 128, 0.1);
       border-radius: 5px;
       border: none;
     }
   </style>
+
+  <script type="text/javascript">
+    function clearContent(){
+      document.getElementById("writeStatus").value="";
+    }
+  </script>
+
 </head>
 
 <body>
@@ -89,9 +96,9 @@
           <a class="media-heading lead" href="#"><%= hostUserName %></a>
           <p class="lead text-warning">发布动态</p>
           <form class="form-actions" action="doReleaseStatus.jsp" method="post">
-            <textarea class="input-block-level" rows="5" name="content" placeholder="在这里写下你想说的话吧..."></textarea>
+            <textarea id="writeStatus" class="input-block-level" rows="5" name="content" placeholder="在这里写下你想说的话吧..."></textarea>
             <button type="submit" class="btn btn-primary">发布</button>
-            <button type="button" class="btn">清空</button>
+            <button type="button" class="btn" onclick="clearContent();">清空内容</button>
           </form>
         </div>
       </div>
@@ -142,7 +149,7 @@
             }
             
             out.println(
-            "  <div class=\"input-append\"> "+
+            "  <div class=\"input-append pull-right\"> "+
             "    <input class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
             "    <button class=\"btn\" type=\"button\">确认</button> "+
             "  </div> "
