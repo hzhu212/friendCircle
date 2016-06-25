@@ -19,7 +19,7 @@
     body{
       background-color: ivory;
     }
-    .form-actions{
+    form .form-actions{
       background-color: rgba(240, 128, 128, 0.1);
       border-radius: 5px;
       border: none;
@@ -100,7 +100,7 @@
       <%
           ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(hostUserID);
           if(statusList.isEmpty()){
-        	out.println("<p class=\"lead\">没有动态</p>");
+          	out.println("<p class=\"lead\">没有动态</p>");
           }
           for(HashMap<String,String> aStatus: statusList){
             String statusID = aStatus.get("statusID");

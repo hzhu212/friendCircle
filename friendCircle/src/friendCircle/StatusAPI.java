@@ -19,13 +19,20 @@ public class StatusAPI extends SQLmanager {
 		}
 		return temp;
 	}
-	public String addStatus(String[] info) throws Exception {	//添加状态信息，返回自动生成的状态ID
+	/**
+	 * 插入一条用户状态，返回是否插入成功
+	 * @param info
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean addStatus(String[] info) throws Exception {
 		startMySQL();
 		String id = produceID();
 		String sql = "INSERT INTO `friendCircle`.`status` VALUES "
-				+ "('"+id+"','"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"')";
+				+ "("+id+",'"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"')";
 		stmt.execute(sql);
-		return id;
+		boolean success = (stmt.getUpdateCount() != -1);
+		return success;
 	}
 	public String[] getStatus(String id) throws Exception {	//返回状态信息
 		startMySQL();

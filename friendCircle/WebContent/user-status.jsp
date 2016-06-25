@@ -19,6 +19,11 @@
     body{
       background-color: ivory;
     }
+    form .form-actions{
+      background-color: rgba(240, 128, 128, 0.1);
+      border-radius: 5px;
+      border: none;
+    }
   </style>
 </head>
 
@@ -75,6 +80,21 @@
   <div class="container container-narrow" style="margin-top:100px;">
     <div class="row">
       <div class="span7 offset2">
+
+      <div class="media">
+        <a class="pull-left" href="#">
+          <%="<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+hostUserID+".png\" style=\"width: 64px; height: 64px;\">"%>
+        </a>
+        <div class="media-body">
+          <a class="media-heading lead" href="#"><%= hostUserName %></a>
+          <p class="lead text-warning">发布动态</p>
+          <form class="form-actions" action="doReleaseStatus.jsp" method="post">
+            <textarea class="input-block-level" rows="5" name="content" placeholder="在这里写下你想说的话吧..."></textarea>
+            <button type="submit" class="btn btn-primary">发布</button>
+            <button type="button" class="btn">清空</button>
+          </form>
+        </div>
+      </div>
       
       <%
           ArrayList<HashMap<String,String>> statusList = statusAPI.getStatusByUserID(hostUserID);
