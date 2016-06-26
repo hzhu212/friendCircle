@@ -31,16 +31,14 @@
 	info[1] = new SimpleDateFormat("yyyy-MM-dd").format(date);
 	info[2] = new SimpleDateFormat("HH:mm:ss").format(date);
 	info[3] = content;
+	
+/* 	for(String s: info){
+		System.out.println(s);
+	} */
+	
 	boolean success = statusAPI.addStatus(info);
 	if(success){
-	out.println(
-		"<div class=\"alert alert-error alert-block\">"+
-		"<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>"+
-		"<h4>出错啦~</h4>"+
-		"发布消息失败，请重试..."+
-		"</div>"
-		);
-		//response.sendRedirect("user-status.jsp");
+		response.sendRedirect("user-status.jsp");
 	}else{
 		out.println(
 		"<div class=\"alert alert-error alert-block\">"+

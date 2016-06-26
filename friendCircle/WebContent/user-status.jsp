@@ -18,19 +18,74 @@
 	<style type="text/css">
 		body{
 			background-color: ivory;
+      margin-bottom: 300px;
 		}
 		form.form-actions{
 			background-color: rgba(240, 128, 128, 0.1);
 			border-radius: 5px;
 			border: none;
 		}
+
 	</style>
 
 	<script type="text/javascript">
-		function clearContent(){
-			document.getElementById("writeStatus").value="";
-		}
-	</script>
+    var statusID = "";
+    var targetUserName = "";
+    var inputDom = "";
+
+    // 清空状态编辑框
+    function clearContent(){
+      document.getElementById("writeStatus").value="";
+    }
+
+    // 当点击一个用户名，则将他设置为要回复的用户
+    function userNameClicked(thisUserName,thisStatusID){
+      statusID = thisStatusID;
+      targetUserName = thisUserName;
+      if(inputDom !== ""){
+        inputDom.placeholder = "发表评论";
+      }
+      inputDom = document.getElementById(thisStatusID);
+      inputDom.placeholder = "回复"+thisUserName;
+    }
+
+    // 提交回复，如果没有要回复的用户名或者当前定位的状态与点选的用户名不是同一条，则回复发状态者；
+    function sendComment(defaultStatusID,defaultUserName){
+      if(statusID === "" || statusID!==defaultStatusID){
+        statusID = defaultStatusID;
+        targetUserName = defaultUserName;
+        if(inputDom !== ""){
+          inputDom.placeholder = "发表评论";
+        }
+        inputDom = document.getElementById(statusID);
+      }
+      commentContent = inputDom.value;
+      // alert(statusID+"\n"+targetUserName+"\n"+commentContent);
+      sendAjax();
+      statusID = "";
+      targetUserName = "";
+      inputDom = "";
+    }
+
+    // 通过ajax向服务端传输参数
+    function sendAjax(){
+      $.post("doReleaseComment.jsp",
+      {
+        "statusID":statusID,
+        "targetUserName":targetUserName,
+        content:commentContent
+      },
+      function(data,status){
+        // alert("Data: " + data + "\nStatus: " + status);
+        // alert(typeof status);
+        if (status === "success") {
+          location.reload();
+        }else{
+          alert("发送评论失败！");
+        }
+      });
+    };
+  </script>
 
 </head>
 
@@ -118,14 +173,14 @@
 					String time = aStatus.get("date") + " " + aStatus.get("time");
 
 					out.println(
-					"<div class=\"media\"> "+
-					"<a class=\"pull-left\" href=\"#\"> "+
-					"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+hostUserID+".png\" style=\"width: 64px; height: 64px;\"> "+
-					"</a> "+
-					"<div class=\"media-body\"> "+
-					"<a class=\"media-heading lead\" href=\"#\">"+userName+"</a> "+
-					"<p>"+content+"</p> "+
-					"<p class=\"muted\"><em>"+time+"</em></p> ");
+          "<div class=\"media\"> "+
+          "<a class=\"pull-left\" onclick=\"userNameClicked('"+userName+"','"+statusID+"')\"> "+
+          "<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+hostUserID+".png\" style=\"width: 64px; height: 64px;\"> "+
+          "</a> "+
+          "<div class=\"media-body\"> "+
+          "<a class=\"media-heading lead\" onclick=\"userNameClicked('"+userName+"','"+statusID+"')\">"+hostUserName+"</a> "+
+          "<p>"+content+"</p> "+
+          "<p class=\"muted\"><em>"+time+"</em></p> ");
 
 					ArrayList<HashMap<String,String>> commentList = commentAPI.getCommentsByStatusID(statusID);
 					boolean isEmpty = (commentList.isEmpty());
@@ -139,10 +194,10 @@
 						String comContent = aComment.get("content");
 						
 						out.println(
-						"<div> "+
-						"<a href=\"#\">"+from+"</a><span> 回复 </span><a href=\"#\">"+to+"</a><span>: </span> "+
-						"<span>"+comContent+"</span> "+
-						"</div> ");
+            "<div> "+
+            "<a onclick=\"userNameClicked('"+from+"','"+statusID+"')\">"+from+"</a><span> 回复 </span><a onclick=\"userNameClicked('"+to+"','"+statusID+"')\">"+to+"</a><span>: </span> "+
+            "<span>"+comContent+"</span> "+
+            "</div> ");
 					}
 					
 					if(!isEmpty){
@@ -150,11 +205,11 @@
 					}
 					
 					out.println(
-					"<div class=\"input-append pull-right\"> "+
-					"<input class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
-					"<button class=\"btn\" type=\"button\">确认</button> "+
-					"</div> "
-					);
+          "<div class=\"input-append pull-right\"> "+
+          "<input id=\""+statusID+"\" class=\"span5\" id=\"appendedInputButton\" type=\"text\" placeholder=\"发表评论\"> "+
+          "<button class=\"btn\" type=\"button\" onclick=\"sendComment('"+statusID+"','"+userName+"')\">确认</button> "+
+          "</div> "
+          );
 
 					out.println(
 					"</div> "+

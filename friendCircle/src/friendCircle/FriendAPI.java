@@ -15,10 +15,10 @@ public class FriendAPI extends SQLmanager {
 	public ArrayList<String> getFriend(String id) throws Exception {	//返回朋友信息
 		startMySQL();
 		ArrayList<String> lis = new ArrayList<String>();
-		String sql = "SELECT * FROM `friendCircle`.`friend` WHERE userID1='"+id+"'";
+		String sql = "SELECT userID2 FROM `friendCircle`.`friend` WHERE userID1='"+id+"'";
 		rs = stmt.executeQuery(sql);
 		while (rs.next())
-			lis.add(rs.getString("userID1"));
+			lis.add(rs.getString("userID2"));
 		return lis;
 	}
 	public void delFriend(String[] id) throws Exception {	//删除朋友

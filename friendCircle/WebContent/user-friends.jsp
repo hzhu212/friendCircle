@@ -22,6 +22,10 @@
 		background-image: url("./bootstrap/img/background/3.jpg");
 		background-size: cover;
 	}
+	#content-area{
+		background-color:rgba(255, 255, 255, 0.3);
+		padding: 50px;
+	}
 </style>
 
 </head>
@@ -30,10 +34,10 @@
 
 	<%
 	String hostUserName=session.getAttribute("loginUser").toString();
-	UserAPI userApi=new UserAPI();
-	String[] userInfo=userApi.getUser(hostUserName);
+	String hostUserID = session.getAttribute("loginUserID").toString();
+	UserAPI userApi = new UserAPI();
 	FriendAPI friendApi=new FriendAPI();
-	ArrayList<String> userFriends=friendApi.getFriend(userInfo[0]);
+	ArrayList<String> userFriends=friendApi.getFriend(hostUserID);
 	%>
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -75,28 +79,27 @@
 
 	<div class="container container-narrow" style="margin-top:100px;">
 		<div class="row">
-			<div class="span7 offset2">
+			<div class="span7 offset2" id="content-area">
 				<%
 				//如果没有好友
-				if(userFriends.size()==0){
+				if(userFriends.isEmpty()){
 					out.print("<div id=\"friends\">"+"<p class=\"lead\">您尚未添加好友</p class=\"lead\">"+"</div>");
 				}
 				else{
 					out.print("<div id=\"friends\">"+"<p class=\"lead\">您的好友信息为：</p class=\"lead\">"+"</div>");
 				}
 				//有好友
-				for(int i=0;i<userFriends.size();i++){
-					String[] temp=userApi.getUser(userApi.getUserNameByID(userFriends.get(i)));
+				for(String friendName: userFriends){
+					String[] aFriend=userApi.getUser(userApi.getUserNameByID(friendName));
 					out.print(
 					"<div id=\"friends\">" +
-						"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"无法加载\"" +
-						"src=\""+temp[5]+"\"" +
-						"<br>好友名："+temp[1]+"<br>" +
-						"个性签名："+temp[4]+"<br>" +
+						"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"无法加载\" src=\"./bootstrap/img/display-photo/"+aFriend[0]+".png\" style=\"width: 64px; height: 64px;\"> "+
+						"<br>好友名："+aFriend[1]+"<br>" +
+						"个性签名："+aFriend[4]+"<br>" +
 					"</div>");
 				}
 				//好友推荐
-				ArrayList<ArrayList<String>> suggestion=friendApi.getSuggestion(userInfo[0]);
+				ArrayList<ArrayList<String>> suggestion=friendApi.getSuggestion(hostUserID);
 				out.print("<div id=\"suggest\">"+"<h2>好友推荐信息：</h2>"+"</div>");
 				for(ArrayList<String> sug:suggestion){
 					if(sug==null)

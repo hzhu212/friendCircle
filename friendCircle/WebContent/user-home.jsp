@@ -18,6 +18,7 @@
 	<style type="text/css">
 		body{
 			background-color: ivory;
+			margin-bottom: 300px;
 		}
 		form.form-actions{
 			background-color: rgba(240, 128, 128, 0.1);
@@ -31,7 +32,7 @@
 		var targetUserName = "";
 		var inputDom = "";
 
-		// 情况状态编辑框
+		// 清空状态编辑框
 		function clearContent(){
 			document.getElementById("writeStatus").value="";
 		}
@@ -58,14 +59,14 @@
 				inputDom = document.getElementById(statusID);
 			}
 			commentContent = inputDom.value;
-			alert(statusID+"\n"+targetUserName+"\n"+commentContent);
+			// alert(statusID+"\n"+targetUserName+"\n"+commentContent);
 			sendAjax();
-
 			statusID = "";
 			targetUserName = "";
 			inputDom = "";
 		}
 
+		// 通过ajax向服务端传输参数
 		function sendAjax(){
 		  $.post("doReleaseComment.jsp",
 		  {
@@ -74,7 +75,13 @@
 		    content:commentContent
 		  },
 		  function(data,status){
-		    alert("Data: " + data + "\nStatus: " + status);
+		    // alert("Data: " + data + "\nStatus: " + status);
+		    // alert(typeof status);
+		    if (status === "success") {
+		    	location.reload();
+		    }else{
+			    alert("发送评论失败！");
+		    }
 		  });
 		};
 	</script>
@@ -145,7 +152,7 @@
 					<%="<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"头像\" src=\"./bootstrap/img/display-photo/"+hostUserID+".png\" style=\"width: 64px; height: 64px;\">"%>
 				</a>
 				<div class="media-body">
-					<a class="media-heading lead" href="#"><%= hostUserName %></a>
+					<a class="media-heading lead" href="user-status.jsp"><%= hostUserName %></a>
 					<p class="lead text-warning">发布动态</p>
 					<form class="form-actions" action="doReleaseStatus.jsp" method="post">
 						<textarea id="writeStatus" class="input-block-level" rows="5" name="content" placeholder="在这里写下你想说的话吧..."></textarea>

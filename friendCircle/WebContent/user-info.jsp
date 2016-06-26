@@ -21,7 +21,7 @@
 		background-image: url("./bootstrap/img/background/3.jpg");
 		background-size: cover;
 	}
-	#context{
+	#content-area{
 		background-color:rgba(255, 255, 255, 0.3);
 		padding: 50px;
 	}
@@ -82,12 +82,12 @@
 
 	<div class="container container-narrow" style="margin-top:100px;">
 		<div class="row">
-			<div class="span8 offset2" id="context">
+			<div class="span7 offset2" id="content-area">
 				<%
 				out.print(
 				"<div class=\"media\"> "+
 					"<a class=\"pull-left\" href=\"#\"> "+
-						"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"无法加载\" src=\""+userInfo[5]+"\""+"style=\"width: 64px; height: 64px;\"> "+
+						"<img class=\"media-object\" data-src=\"holder.js/64x64\" alt=\"无法加载\" src=\"./bootstrap/img/display-photo/"+userInfo[0]+".png\" style=\"width: 64px; height: 64px;\"> "+
 					"</a>" + 
 					"<div class=\"media-body\">" + 
 						"<a class=\"media-heading lead\" href=\"#\">"+userInfo[1]+"</a><br>"+
