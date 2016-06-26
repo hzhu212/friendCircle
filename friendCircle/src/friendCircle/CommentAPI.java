@@ -19,13 +19,14 @@ public class CommentAPI extends SQLmanager {
 		}
 		return temp;
 	}
-	public String addComment(String[] info) throws Exception {	//添加评论信息，返回自动生成的评论ID
+	public boolean addComment(String[] info) throws Exception {	//添加评论信息，返回自动生成的评论ID
 		startMySQL();
 		String id = produceID();
 		String sql = "INSERT INTO `friendCircle`.`comment` VALUES "
 				+ "('"+id+"','"+info[0]+"','"+info[1]+"','"+info[2]+"','"+info[3]+"','"+info[4]+"','"+info[5]+"')";
 		stmt.execute(sql);
-		return id;
+		boolean success = (stmt.getUpdateCount() != -1);
+		return success;
 	}
 	public String[] getComment(String id) throws Exception {	//返回评论信息
 		startMySQL();

@@ -27,30 +27,56 @@
 	</style>
 
 	<script type="text/javascript">
-    var targetUserName = "";
-    var inputDom = "";
+		var statusID = "";
+		var targetUserName = "";
+		var inputDom = "";
 
+		// 情况状态编辑框
 		function clearContent(){
 			document.getElementById("writeStatus").value="";
 		}
 
-    function userNameClicked(userName,statusID){
-      targetUserName = userName;
-      if(inputDom !== ""){
-        inputDom.placeholder = "发表评论";
-      }
-      inputDom = document.getElementById(statusID);
-      inputDom.placeholder = "回复"+userName;
-    }
+		// 当点击一个用户名，则将他设置为要回复的用户
+		function userNameClicked(thisUserName,thisStatusID){
+			statusID = thisStatusID;
+			targetUserName = thisUserName;
+			if(inputDom !== ""){
+				inputDom.placeholder = "发表评论";
+			}
+			inputDom = document.getElementById(thisStatusID);
+			inputDom.placeholder = "回复"+thisUserName;
+		}
 
-    function sendComment(statusID,userName){
-      if(targetUserName === ""){
-        targetUserName = userName;
-        inputDom = document.getElementById(statusID);
-      }
-      commentContent = inputDom.value;
-      alert(statusID+"\n"+targetUserName+"\n"+commentContent);
-    }
+		// 提交回复，如果没有要回复的用户名或者当前定位的状态与点选的用户名不是同一条，则回复发状态者；
+		function sendComment(defaultStatusID,defaultUserName){
+			if(statusID === "" || statusID!==defaultStatusID){
+				statusID = defaultStatusID;
+				targetUserName = defaultUserName;
+				if(inputDom !== ""){
+					inputDom.placeholder = "发表评论";
+				}
+				inputDom = document.getElementById(statusID);
+			}
+			commentContent = inputDom.value;
+			alert(statusID+"\n"+targetUserName+"\n"+commentContent);
+			sendAjax();
+
+			statusID = "";
+			targetUserName = "";
+			inputDom = "";
+		}
+
+		function sendAjax(){
+		  $.post("doReleaseComment.jsp",
+		  {
+		    "statusID":statusID,
+		    "targetUserName":targetUserName,
+		    content:commentContent
+		  },
+		  function(data,status){
+		    alert("Data: " + data + "\nStatus: " + status);
+		  });
+		};
 	</script>
 
 </head>
@@ -130,7 +156,7 @@
 			</div>
 
 			
-  			<%
+				<%
 				ArrayList<HashMap<String,String>> statusList = statusAPI.getFriendsStatus(hostUserID);
 				if(statusList.isEmpty()){
 					out.println("<p class=\"lead\">没有动态</p>");
