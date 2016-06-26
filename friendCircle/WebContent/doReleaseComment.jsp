@@ -18,10 +18,6 @@
 	info[4] = new SimpleDateFormat("HH:mm:ss").format(date);
 	info[5] = request.getParameter("content").toString();
 	
-/* 	for(String s: info){
-		System.out.println(s);
-	} */
-	
 	boolean success = commentAPI.addComment(info);
 	String successCode = success?"ture":"false";
 	session.setAttribute("commentSuccess",successCode);

@@ -59,7 +59,6 @@
 				inputDom = document.getElementById(statusID);
 			}
 			commentContent = inputDom.value;
-			// alert(statusID+"\n"+targetUserName+"\n"+commentContent);
 			sendAjax();
 			statusID = "";
 			targetUserName = "";
@@ -75,8 +74,6 @@
 		    content:commentContent
 		  },
 		  function(data,status){
-		    // alert("Data: " + data + "\nStatus: " + status);
-		    // alert(typeof status);
 		    if (status === "success") {
 		    	location.reload();
 		    }else{
